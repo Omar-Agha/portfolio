@@ -1,23 +1,37 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { siteBase, localePaths } from '../content'
+import PortfolioView from '../views/PortfolioView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(siteBase.pathname),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView,
+      path: localePaths.en,
+      alias: '/index.html',
+      component: PortfolioView,
+      meta: { locale: 'en' },
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      path: localePaths.ar,
+      alias: '/ar/index.html',
+      component: PortfolioView,
+      meta: { locale: 'ar' },
     },
+    { path: '/:pathMatch(.*)*', redirect: (to) => ({ path: '/', query: to.query, hash: to.hash }) },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) return savedPosition
+    if (!to.hash || to.hash === from.hash) return false
+
+    const target = document.getElementById(to.hash.slice(1))
+    if (!target) return false
+
+    target.focus({ preventScroll: true })
+    const top = parseFloat(getComputedStyle(target).scrollMarginTop) || 0
+    const smooth =
+      Boolean(from.matched.length) && !matchMedia('(prefers-reduced-motion: reduce)').matches
+    return { el: target, top, behavior: smooth ? 'smooth' : 'instant' }
+  },
 })
 
 export default router
