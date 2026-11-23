@@ -73,33 +73,90 @@ UI presentation, visual effects, and decorative elements are not considered port
 
 5. Visual Design Direction
 
-Create a distinctive, premium engineering portfolio.
+Design Identity: Technical Minimalism
 
-The visual identity should communicate:
+Create a premium, dark-first portfolio with a refined, modern, editorial aesthetic.
 
-* Technical sophistication
-* Professional confidence
-* Precision
-* Modern engineering
-* Attention to detail
+The design should communicate engineering precision, technical sophistication, and professional credibility.
 
-Favor a refined, contemporary aesthetic with strong typography, thoughtful composition, consistent spacing, and restrained visual effects.
+The visual experience should feel distinctive and intentionally crafted, not generated from a generic developer portfolio template.
 
-Avoid:
+Visual Language
+
+* Theme: Dark-first, using deep charcoal and near-black surfaces.
+* Typography: Strong, modern sans-serif typography with a clear hierarchy. Use large, expressive headings and highly readable body text.
+* Accent: Choose one restrained accent color and use it consistently for emphasis and interaction.
+* Layout: Spacious, balanced compositions with generous whitespace. Subtle asymmetry is encouraged where it improves visual interest.
+* Surfaces: Refined cards and containers with subtle borders, understated contrast, and minimal visual noise.
+* Backgrounds: Optional subtle grids, geometric details, or technical patterns that enhance the design without distracting from content.
+* Icons: Minimal, consistent iconography.
+* Imagery: Treat images as supporting elements rather than the foundation of the design.
+
+Visual Hierarchy
+
+The Hero should establish a strong first impression through typography, composition, and clear professional positioning.
+
+Featured Work should receive significant visual emphasis because it demonstrates real-world engineering experience.
+
+Engineering Lab should feel exploratory and technical while remaining consistent with the overall visual identity.
+
+Skills, Experience, About, and Contact should maintain a clear hierarchy and comfortable reading experience.
+
+Motion & Interaction
+
+Use restrained, purposeful animation.
+
+Favor subtle entrance transitions, refined hover states, and smooth interactive feedback.
+
+Motion should reinforce hierarchy and improve perceived quality, not compete with the content.
+
+Avoid excessive parallax, continuous decorative animation, and heavy animation libraries unless clearly justified.
+
+Respect reduced-motion preferences.
+
+Responsive & RTL Design
+
+Treat mobile and Arabic RTL layouts as first-class design experiences.
+
+Adapt compositions thoughtfully rather than simply shrinking or mirroring desktop layouts.
+
+Maintain consistent visual quality, spacing, hierarchy, and interaction behavior across languages and screen sizes.
+
+Design Freedom
+
+You have creative freedom to choose:
+
+* Exact colors and shades
+* Typography and font combinations
+* Layout compositions
+* Card designs
+* Decorative details
+* Animation techniques
+* Responsive adaptations
+
+Make these decisions as part of one coherent design system.
+
+Do not introduce unrelated visual styles between sections.
+
+Avoid
 
 * Generic developer portfolio templates
-* Excessive gradients and glowing effects
-* Overcrowded layouts
-* Unnecessary decorative elements
-* Heavy animations that distract from content
 * Dashboard-like interfaces
-* Inconsistent visual patterns
+* Excessive gradients, glows, or glassmorphism
+* Overused terminal/code-window decorations
+* Random technology logos as decorative backgrounds
+* Crowded layouts
+* Unnecessary visual complexity
+* Inconsistent card styles
+* Animations that compromise readability or performance
 
-The website should feel polished and cohesive from the first screen to the footer.
+Design Quality Standard
 
-You have creative freedom over the color palette, typography, layout, imagery, component styling, and visual hierarchy.
+The website should feel like a carefully art-directed personal portfolio.
 
-Make deliberate design decisions rather than following a template mechanically.
+Every section should have a clear purpose, a strong visual hierarchy, and a consistent relationship with the overall design system.
+
+Prioritize thoughtful composition and visual refinement over adding more visual elements.
 
 6. Page Structure & Interactions
 
