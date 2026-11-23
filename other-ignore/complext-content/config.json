@@ -1,0 +1,189 @@
+{
+  "site": {
+    "defaultLocale": "en",
+    "supportedLocales": [
+      "en",
+      "ar"
+    ],
+    "navigation": [
+      "work",
+      "lab",
+      "skills",
+      "experience",
+      "about",
+      "contact"
+    ],
+    "sections": [
+      {
+        "id": "hero",
+        "visible": true
+      },
+      {
+        "id": "work",
+        "visible": true
+      },
+      {
+        "id": "lab",
+        "visible": true
+      },
+      {
+        "id": "skills",
+        "visible": true
+      },
+      {
+        "id": "experience",
+        "visible": true
+      },
+      {
+        "id": "about",
+        "visible": true
+      },
+      {
+        "id": "contact",
+        "visible": true
+      }
+    ],
+    "seo": {
+      "ogImage": "/images/og-cover.webp"
+    }
+  },
+  "profile": {
+    "avatar": "/images/profile.webp",
+    "resume": "/resume.pdf",
+    "availability": {
+      "visible": true
+    },
+    "socials": {
+      "github": "https://github.com/Omar-Agha",
+      "linkedin": "https://www.linkedin.com/in/eng-omar-agha/",
+      "email": "omar.tamer982@gmail.com"
+    },
+    "hero": {
+      "primaryAction": {
+        "type": "section",
+        "target": "work"
+      },
+      "secondaryAction": {
+        "type": "file",
+        "target": "/resume.pdf"
+      }
+    }
+  },
+  "work": {
+    "items": [
+      {
+        "id": "financial-platform",
+        "visible": true,
+        "featured": true,
+        "cover": "/images/projects/financial-platform.webp",
+        "tags": [
+          ".NET",
+          "ABP Framework",
+          "RabbitMQ",
+          "Redis",
+          "Kubernetes"
+        ],
+        "links": []
+      }
+    ]
+  },
+  "lab": {
+    "items": [
+      {
+        "id": "microservices-template",
+        "visible": true,
+        "status": "in-progress",
+        "cover": "/images/lab/microservices.webp",
+        "technologies": [
+          ".NET",
+          "Docker",
+          "RabbitMQ",
+          "Redis"
+        ],
+        "repositoryUrl": "",
+        "demoUrl": ""
+      },
+      {
+        "id": "7ake",
+        "visible": true,
+        "status": "in-progress",
+        "cover": "/images/lab/7ake.webp",
+        "technologies": [
+          "Laravel",
+          "Filament"
+        ],
+        "repositoryUrl": "",
+        "demoUrl": ""
+      },
+      {
+        "id": "spring-boot",
+        "visible": true,
+        "status": "experimental",
+        "cover": "/images/lab/spring.webp",
+        "technologies": [
+          "Java",
+          "Spring Boot"
+        ],
+        "repositoryUrl": "",
+        "demoUrl": ""
+      }
+    ]
+  },
+  "skills": {
+    "categories": [
+      {
+        "id": "backend",
+        "visible": true
+      },
+      {
+        "id": "architecture",
+        "visible": true
+      },
+      {
+        "id": "data",
+        "visible": true
+      },
+      {
+        "id": "devops",
+        "visible": true
+      },
+      {
+        "id": "frontend",
+        "visible": true
+      }
+    ]
+  },
+  "experience": {
+    "items": [
+      {
+        "id": "experience-1",
+        "visible": true,
+        "employmentType": "full-time",
+        "startDate": "2023-01",
+        "endDate": null,
+        "current": true,
+        "technologies": [
+          ".NET",
+          "SQL Server",
+          "RabbitMQ",
+          "Docker"
+        ],
+        "companyUrl": ""
+      }
+    ]
+  },
+  "contact": {
+    "primaryAction": {
+      "type": "email"
+    },
+    "secondaryAction": {
+      "type": "linkedin"
+    }
+  },
+  "footer": {
+    "showCurrentYear": true,
+    "showSocialLinks": true,
+    "showBackToTop": true,
+    "creditsVisible": true
+  }
+}

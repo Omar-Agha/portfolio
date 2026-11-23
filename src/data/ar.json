@@ -1,0 +1,375 @@
+{
+  "site": {
+    "defaultLocale": "en",
+    "supportedLocales": [
+      "en",
+      "ar"
+    ],
+    "navigation": [
+      {
+        "id": "work",
+        "label": "أبرز الأعمال",
+        "href": "#work"
+      },
+      {
+        "id": "lab",
+        "label": "المختبر الهندسي",
+        "href": "#lab"
+      },
+      {
+        "id": "skills",
+        "label": "الخبرات التقنية",
+        "href": "#skills"
+      },
+      {
+        "id": "experience",
+        "label": "الخبرة المهنية",
+        "href": "#experience"
+      },
+      {
+        "id": "about",
+        "label": "نبذة عني",
+        "href": "#about"
+      },
+      {
+        "id": "contact",
+        "label": "تواصل معي",
+        "href": "#contact"
+      }
+    ],
+    "sections": [
+      {
+        "id": "hero",
+        "visible": true
+      },
+      {
+        "id": "work",
+        "visible": true
+      },
+      {
+        "id": "lab",
+        "visible": true
+      },
+      {
+        "id": "skills",
+        "visible": true
+      },
+      {
+        "id": "experience",
+        "visible": true
+      },
+      {
+        "id": "about",
+        "visible": true
+      },
+      {
+        "id": "contact",
+        "visible": true
+      }
+    ],
+    "seo": {
+      "title": "عمر آغا | مهندس برمجيات خلفية أول",
+      "description": "مهندس برمجيات خلفية أول متخصص في الأنظمة الموزعة والخدمات المصغّرة والمنصات المالية.",
+      "ogImage": "/images/og-cover.webp"
+    },
+    "ui": {
+      "viewDetails": "استعرض تفاصيل المشروع",
+      "viewRepository": "عرض المستودع",
+      "viewDemo": "عرض تجريبي",
+      "close": "إغلاق",
+      "technologies": "التقنيات المستخدمة",
+      "architecture": "المعمارية",
+      "overview": "نظرة عامة",
+      "challenges": "التحديات الهندسية",
+      "contributions": "مساهماتي",
+      "outcomes": "النتائج",
+      "implemented": "المنجز",
+      "planned": "المخطط له",
+      "status": {
+        "in-progress": "In Progress",
+        "experimental": "Experimental",
+        "completed": "Completed"
+      },
+      "present": "حتى الآن"
+    },
+    "logoText": "OA."
+  },
+  "profile": {
+    "avatar": "/images/profile.webp",
+    "resume": "/resume.pdf",
+    "socials": {
+      "github": "https://github.com/Omar-Agha",
+      "linkedin": "https://www.linkedin.com/in/eng-omar-agha/",
+      "email": ""
+    },
+    "name": "عمر آغا",
+    "headline": "مهندس برمجيات خلفية أول | الأنظمة الموزعة والخدمات المصغّرة",
+    "location": "دمشق، سوريا",
+    "availability": {
+      "visible": true,
+      "label": "متاح لفرص عمل جديدة"
+    },
+    "hero": {
+      "primaryAction": {
+        "type": "section",
+        "target": "work"
+      },
+      "secondaryAction": {
+        "type": "file",
+        "target": "/resume.pdf"
+      },
+      "eyebrow": "مهندس برمجيات خلفية أول",
+      "title": "أبني أنظمة موثوقة وقابلة للتوسع.",
+      "description": "أصمّم وأطوّر أنظمة خلفية موثوقة، مع تركيز على المعماريات الموزعة والخدمات المصغّرة والمنصات المالية.",
+      "primaryActionLabel": "استعرض أعمالي",
+      "secondaryActionLabel": "تحميل السيرة الذاتية"
+    }
+  },
+  "work": {
+    "eyebrow": "أعمال مختارة",
+    "title": "أبرز الأعمال",
+    "description": "مجموعة مختارة من مساهماتي الهندسية المهنية والأنظمة الخلفية المعقدة التي شاركت في تطويرها.",
+    "items": [
+      {
+        "id": "financial-platform",
+        "visible": true,
+        "featured": true,
+        "cover": "/images/projects/financial-platform.webp",
+        "tags": [
+          ".NET",
+          "ABP Framework",
+          "RabbitMQ",
+          "Redis",
+          "Kubernetes"
+        ],
+        "links": [],
+        "title": "منصة الخدمات المالية",
+        "subtitle": "أنظمة مالية مؤسسية",
+        "summary": "خدمات مالية موزعة تدعم الحوالات والمحاسبة وإدارة الأرصدة.",
+        "description": "منصة مالية مبنية على الخدمات المصغّرة تدعم عمليات الحوالات وسير العمل الحساس للأعمال. ركّز عملي على خدمات المجال الخلفية، ووظائف دفتر الأستاذ المحاسبي، وتتبع الأرصدة.",
+        "role": "مطوّر أنظمة خلفية",
+        "period": "التواريخ بحاجة إلى تأكيد",
+        "architecture": [
+          "الخدمات المصغّرة",
+          "التصميم الموجّه بالمجال",
+          "المعمارية القائمة على الأحداث"
+        ],
+        "challenges": [
+          "الحفاظ على اتساق البيانات بين الخدمات",
+          "إدارة قواعد الأعمال المالية المعقدة"
+        ],
+        "contributions": [
+          "طوّرت خدمات خلفية للمجال المالي",
+          "نفّذت وظائف دفتر الأستاذ المحاسبي",
+          "عملت على تتبع الأرصدة وسير العمل المالي"
+        ],
+        "outcomes": []
+      }
+    ]
+  },
+  "lab": {
+    "eyebrow": "مشاريع شخصية",
+    "title": "المختبر الهندسي",
+    "description": "مشاريع شخصية وتجارب تقنية أستكشف من خلالها معماريات الأنظمة الخلفية والتقنيات الجديدة وأنماط التنفيذ.",
+    "items": [
+      {
+        "id": "microservices-template",
+        "visible": true,
+        "status": "in-progress",
+        "cover": "/images/lab/microservices.webp",
+        "technologies": [
+          ".NET",
+          "Docker",
+          "RabbitMQ",
+          "Redis"
+        ],
+        "repositoryUrl": "",
+        "demoUrl": "",
+        "title": "قالب الخدمات المصغّرة",
+        "summary": "قالب شخصي لتجربة معمارية الأنظمة الخلفية الموزعة.",
+        "description": "بيئة تجريبية متطورة لتقييم أنماط الخدمات القابلة لإعادة الاستخدام وخيارات البنية التحتية.",
+        "architecture": [
+          "الخدمات المصغّرة"
+        ],
+        "implemented": [],
+        "planned": []
+      },
+      {
+        "id": "7ake",
+        "visible": true,
+        "status": "in-progress",
+        "cover": "/images/lab/7ake.webp",
+        "technologies": [
+          "Laravel",
+          "Filament"
+        ],
+        "repositoryUrl": "",
+        "demoUrl": "",
+        "title": "7ake للتجارة الإلكترونية",
+        "summary": "نظام خلفي للتجارة الإلكترونية مبني باستخدام Laravel وFilament.",
+        "description": "منصة تجارة إلكترونية قيد التطوير تستكشف كتالوج المنتجات والمخزون ودورة حياة الطلبات وسير عمل المدفوعات.",
+        "architecture": [
+          "نظام خلفي معياري",
+          "خدمات المجال"
+        ],
+        "implemented": [
+          "إدارة كتالوج المنتجات",
+          "إدارة المخزون",
+          "أساسيات إتمام الشراء ودورة حياة الطلب"
+        ],
+        "planned": [
+          "استكمال تكاملات المدفوعات والتسويات",
+          "إتمام مسارات الشراء من البداية إلى النهاية"
+        ]
+      },
+      {
+        "id": "spring-boot",
+        "visible": true,
+        "status": "experimental",
+        "cover": "/images/lab/spring.webp",
+        "technologies": [
+          "Java",
+          "Spring Boot"
+        ],
+        "repositoryUrl": "",
+        "demoUrl": "",
+        "title": "مختبر Spring Boot",
+        "summary": "بيئة تعلم وتجارب معمارية باستخدام Java وSpring Boot.",
+        "description": "مساحة لاستكشاف ممارسات التطوير باستخدام Spring Boot ومقارنة أساليب بناء الأنظمة الخلفية.",
+        "architecture": [],
+        "implemented": [],
+        "planned": []
+      }
+    ]
+  },
+  "experience": {
+    "eyebrow": "المسيرة المهنية",
+    "title": "الخبرة المهنية",
+    "description": "مسيرتي المهنية في تطوير التطبيقات الخلفية والأنظمة الحيوية للأعمال.",
+    "employmentTypes": {
+      "full-time": "دوام كامل",
+      "part-time": "دوام جزئي",
+      "contract": "تعاقد",
+      "freelance": "عمل حر"
+    },
+    "items": [
+      {
+        "id": "experience-1",
+        "visible": true,
+        "employmentType": "full-time",
+        "startDate": "2023-01",
+        "endDate": null,
+        "current": true,
+        "technologies": [
+          ".NET",
+          "SQL Server",
+          "RabbitMQ",
+          "Docker"
+        ],
+        "companyUrl": "",
+        "company": "اسم الشركة بحاجة إلى تأكيد",
+        "position": "مهندس برمجيات خلفية",
+        "location": "دمشق، سوريا",
+        "summary": "تطوير أنظمة خلفية مؤسسية وتطبيقات موزعة.",
+        "highlights": [
+          "طوّرت خدمات خلفية وسير عمل للأعمال",
+          "عملت على المعماريات الموزعة والمراسلة غير المتزامنة",
+          "نفّذت منطق الأعمال في المجال المالي"
+        ]
+      }
+    ]
+  },
+  "skills": {
+    "eyebrow": "الخبرات التقنية",
+    "title": "التقنيات والمعمارية",
+    "description": "الأدوات وأطر العمل والأساليب المعمارية التي أستخدمها لبناء الأنظمة الخلفية.",
+    "categories": [
+      {
+        "id": "backend",
+        "visible": true,
+        "title": "تطوير الأنظمة الخلفية",
+        "items": [
+          ".NET / C#",
+          "ABP Framework",
+          "Laravel / PHP",
+          "REST APIs",
+          "Entity Framework Core"
+        ]
+      },
+      {
+        "id": "architecture",
+        "visible": true,
+        "title": "المعمارية والأنماط التصميمية",
+        "items": [
+          "الخدمات المصغّرة",
+          "التصميم الموجّه بالمجال",
+          "المعمارية القائمة على الأحداث",
+          "المعمارية النظيفة"
+        ]
+      },
+      {
+        "id": "data",
+        "visible": true,
+        "title": "البيانات والمراسلة",
+        "items": [
+          "SQL Server",
+          "PostgreSQL",
+          "Redis",
+          "RabbitMQ"
+        ]
+      },
+      {
+        "id": "devops",
+        "visible": true,
+        "title": "التشغيل والبنية التحتية",
+        "items": [
+          "Docker",
+          "Kubernetes",
+          "AWS",
+          "Nginx"
+        ]
+      },
+      {
+        "id": "frontend",
+        "visible": true,
+        "title": "الواجهات الأمامية وتقنيات أخرى",
+        "items": [
+          "Vue.js",
+          "TypeScript",
+          "JavaScript"
+        ]
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "نبذة عني",
+    "title": "الهندسة أبعد من كتابة الشيفرة",
+    "paragraphs": [
+      "أنا مهندس برمجيات لدي خبرة في بناء التطبيقات الخلفية والأنظمة المؤسسية، وأركّز على المعمارية الموثوقة ومنطق الأعمال القابل للصيانة.",
+      "خارج عملي المهني، أستمتع باستكشاف التقنيات وتجربة المعماريات وبناء المشاريع الشخصية لتعميق معرفتي الهندسية."
+    ]
+  },
+  "contact": {
+    "primaryAction": {
+      "type": "email"
+    },
+    "secondaryAction": {
+      "type": "linkedin"
+    },
+    "eyebrow": "لنتواصل",
+    "title": "لنبنِ شيئاً مميزاً معاً.",
+    "description": "هل ترغب في التعاون أو مناقشة فرصة في هندسة الأنظمة الخلفية؟ يسعدني التواصل معك.",
+    "primaryActionLabel": "راسلني عبر البريد الإلكتروني",
+    "secondaryActionLabel": "تواصل معي على LinkedIn"
+  },
+  "footer": {
+    "showCurrentYear": true,
+    "showSocialLinks": true,
+    "showBackToTop": true,
+    "creditsVisible": true,
+    "tagline": "هندسة أنظمة موثوقة.",
+    "copyrightName": "Omar Agha",
+    "creditsText": "بُني باستخدام Vue.js · مستضاف على GitHub Pages",
+    "backToTopLabel": "العودة إلى الأعلى"
+  }
+}

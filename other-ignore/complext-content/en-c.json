@@ -1,0 +1,221 @@
+{
+  "site": {
+    "seo": {
+      "title": "Omar Agha | Senior Backend Engineer",
+      "description": "Senior Backend Engineer specializing in distributed systems, microservices, and financial platforms."
+    },
+    "navigation": {
+      "work": "Featured Work",
+      "lab": "Engineering Lab",
+      "skills": "Expertise",
+      "experience": "Experience",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "ui": {
+      "viewDetails": "Explore Case Study",
+      "viewRepository": "View Repository",
+      "viewDemo": "Live Demo",
+      "close": "Close",
+      "technologies": "Technology Stack",
+      "architecture": "Architecture",
+      "overview": "Overview",
+      "challenges": "Engineering Challenges",
+      "contributions": "My Contributions",
+      "outcomes": "Outcomes",
+      "implemented": "Implemented",
+      "planned": "Planned",
+      "status": {
+        "in-progress": "In Progress",
+        "experimental": "Experimental",
+        "completed": "Completed"
+      },
+      "present": "Present"
+    }
+  },
+  "profile": {
+    "name": "Omar Agha",
+    "headline": "Senior Backend Engineer | Distributed Systems & Microservices",
+    "location": "Damascus, Syria",
+    "availability": {
+      "label": "Open to opportunities"
+    },
+    "hero": {
+      "eyebrow": "SENIOR BACKEND ENGINEER",
+      "title": "Building systems that scale.",
+      "description": "I design and develop reliable backend systems, specializing in distributed architectures, microservices, and financial platforms.",
+      "primaryActionLabel": "Explore My Work",
+      "secondaryActionLabel": "Download Resume"
+    }
+  },
+  "work": {
+    "eyebrow": "SELECTED WORK",
+    "title": "Featured Work",
+    "description": "Selected professional engineering contributions and complex backend systems I've helped build.",
+    "items": {
+      "financial-platform": {
+        "title": "Financial Services Platform",
+        "subtitle": "Enterprise Fintech",
+        "summary": "Distributed financial services supporting remittance, accounting, and balance management operations.",
+        "description": "A microservices-based financial platform supporting remittance and other business-critical workflows. My work focused on backend domain services, accounting ledger functionality, and balance tracking.",
+        "role": "Backend Developer",
+        "period": "Dates to confirm",
+        "architecture": [
+          "Microservices",
+          "Domain-Driven Design",
+          "Event-Driven Architecture"
+        ],
+        "challenges": [
+          "Maintaining data consistency across services",
+          "Managing complex financial business rules"
+        ],
+        "contributions": [
+          "Developed backend financial domain services",
+          "Implemented accounting ledger functionality",
+          "Worked on balance tracking and financial workflows"
+        ],
+        "outcomes": []
+      }
+    }
+  },
+  "lab": {
+    "eyebrow": "PERSONAL PROJECTS",
+    "title": "Engineering Lab",
+    "description": "Personal projects and technical experiments where I explore backend architecture, new technologies, and implementation patterns.",
+    "items": {
+      "microservices-template": {
+        "title": "Microservices Template",
+        "summary": "A personal template for experimenting with distributed backend architecture.",
+        "description": "An evolving playground for evaluating reusable service patterns and infrastructure choices.",
+        "architecture": [
+          "Microservices"
+        ],
+        "implemented": [],
+        "planned": []
+      },
+      "7ake": {
+        "title": "7ake E-Commerce",
+        "summary": "An e-commerce backend built with Laravel and Filament.",
+        "description": "An ongoing commerce platform exploring product catalogs, inventory, order lifecycles, and payment workflows.",
+        "architecture": [
+          "Modular Backend",
+          "Domain Services"
+        ],
+        "implemented": [
+          "Product catalog administration",
+          "Inventory management",
+          "Checkout and order lifecycle foundations"
+        ],
+        "planned": [
+          "Complete payment and settlement integrations",
+          "Finalize end-to-end purchase flows"
+        ]
+      },
+      "spring-boot": {
+        "title": "Spring Boot Lab",
+        "summary": "A Java and Spring Boot learning and architecture playground.",
+        "description": "A space to explore Spring Boot development practices and compare backend approaches.",
+        "architecture": [],
+        "implemented": [],
+        "planned": []
+      }
+    }
+  },
+  "skills": {
+    "eyebrow": "TECHNICAL EXPERTISE",
+    "title": "Technologies & Architecture",
+    "description": "Tools, frameworks, and architectural approaches I use to build backend systems.",
+    "categories": {
+      "backend": {
+        "title": "Backend Development",
+        "items": [
+          ".NET / C#",
+          "ABP Framework",
+          "Laravel / PHP",
+          "REST APIs",
+          "Entity Framework Core"
+        ]
+      },
+      "architecture": {
+        "title": "Architecture & Patterns",
+        "items": [
+          "Microservices",
+          "Domain-Driven Design",
+          "Event-Driven Architecture",
+          "Clean Architecture"
+        ]
+      },
+      "data": {
+        "title": "Data & Messaging",
+        "items": [
+          "SQL Server",
+          "PostgreSQL",
+          "Redis",
+          "RabbitMQ"
+        ]
+      },
+      "devops": {
+        "title": "DevOps & Infrastructure",
+        "items": [
+          "Docker",
+          "Kubernetes",
+          "AWS",
+          "Nginx"
+        ]
+      },
+      "frontend": {
+        "title": "Frontend & Other Technologies",
+        "items": [
+          "Vue.js",
+          "TypeScript",
+          "JavaScript"
+        ]
+      }
+    }
+  },
+  "experience": {
+    "eyebrow": "CAREER",
+    "title": "Professional Experience",
+    "description": "My professional journey developing backend applications and business-critical systems.",
+    "items": {
+      "experience-1": {
+        "company": "Company name to confirm",
+        "position": "Backend Engineer",
+        "location": "Damascus, Syria",
+        "summary": "Developing enterprise backend systems and distributed applications.",
+        "highlights": [
+          "Developed backend services and business workflows",
+          "Worked with distributed architecture and asynchronous messaging",
+          "Implemented financial domain logic"
+        ]
+      }
+    },
+    "employmentTypes": {
+      "full-time": "Full-time",
+      "part-time": "Part-time",
+      "contract": "Contract",
+      "freelance": "Freelance"
+    }
+  },
+  "about": {
+    "eyebrow": "ABOUT ME",
+    "title": "Engineering Beyond the Code",
+    "paragraphs": [
+      "I'm a software engineer with experience building backend applications and enterprise systems, with a focus on reliable architecture and maintainable business logic.",
+      "Outside professional work, I enjoy exploring technologies, experimenting with architectures, and building personal projects to deepen my engineering knowledge."
+    ]
+  },
+  "contact": {
+    "eyebrow": "LET'S CONNECT",
+    "title": "Let's Build Something Great.",
+    "description": "Interested in collaborating or discussing a backend engineering opportunity? I'd be happy to connect.",
+    "primaryActionLabel": "Send Me an Email",
+    "secondaryActionLabel": "Connect on LinkedIn"
+  },
+  "footer": {
+    "tagline": "Engineering reliable systems.",
+    "copyrightName": "Omar Agha",
+    "creditsText": "Built with Vue.js · Hosted on GitHub Pages",
+    "backToTopLabel": "Back to top"
+  }
+}

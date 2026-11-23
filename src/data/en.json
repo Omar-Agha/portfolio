@@ -1,0 +1,375 @@
+{
+  "site": {
+    "defaultLocale": "en",
+    "supportedLocales": [
+      "en",
+      "ar"
+    ],
+    "navigation": [
+      {
+        "id": "work",
+        "label": "Featured Work",
+        "href": "#work"
+      },
+      {
+        "id": "lab",
+        "label": "Engineering Lab",
+        "href": "#lab"
+      },
+      {
+        "id": "skills",
+        "label": "Expertise",
+        "href": "#skills"
+      },
+      {
+        "id": "experience",
+        "label": "Experience",
+        "href": "#experience"
+      },
+      {
+        "id": "about",
+        "label": "About",
+        "href": "#about"
+      },
+      {
+        "id": "contact",
+        "label": "Contact",
+        "href": "#contact"
+      }
+    ],
+    "sections": [
+      {
+        "id": "hero",
+        "visible": true
+      },
+      {
+        "id": "work",
+        "visible": true
+      },
+      {
+        "id": "lab",
+        "visible": true
+      },
+      {
+        "id": "skills",
+        "visible": true
+      },
+      {
+        "id": "experience",
+        "visible": true
+      },
+      {
+        "id": "about",
+        "visible": true
+      },
+      {
+        "id": "contact",
+        "visible": true
+      }
+    ],
+    "seo": {
+      "title": "Omar Agha | Senior Backend Engineer",
+      "description": "Senior Backend Engineer specializing in distributed systems, microservices, and financial platforms.",
+      "ogImage": "/images/og-cover.webp"
+    },
+    "ui": {
+      "viewDetails": "Explore Case Study",
+      "viewRepository": "View Repository",
+      "viewDemo": "Live Demo",
+      "close": "Close",
+      "technologies": "Technology Stack",
+      "architecture": "Architecture",
+      "overview": "Overview",
+      "challenges": "Engineering Challenges",
+      "contributions": "My Contributions",
+      "outcomes": "Outcomes",
+      "implemented": "Implemented",
+      "planned": "Planned",
+      "status": {
+        "in-progress": "In Progress",
+        "experimental": "Experimental",
+        "completed": "Completed"
+      },
+      "present": "Present"
+    },
+    "logoText": "OA."
+  },
+  "profile": {
+    "avatar": "/images/profile.webp",
+    "resume": "/resume.pdf",
+    "socials": {
+      "github": "https://github.com/Omar-Agha",
+      "linkedin": "https://www.linkedin.com/in/eng-omar-agha/",
+      "email": ""
+    },
+    "name": "Omar Agha",
+    "headline": "Senior Backend Engineer | Distributed Systems & Microservices",
+    "location": "Damascus, Syria",
+    "availability": {
+      "visible": true,
+      "label": "Open to opportunities"
+    },
+    "hero": {
+      "primaryAction": {
+        "type": "section",
+        "target": "work"
+      },
+      "secondaryAction": {
+        "type": "file",
+        "target": "/resume.pdf"
+      },
+      "eyebrow": "SENIOR BACKEND ENGINEER",
+      "title": "Building systems that scale.",
+      "description": "I design and develop reliable backend systems, specializing in distributed architectures, microservices, and financial platforms.",
+      "primaryActionLabel": "Explore My Work",
+      "secondaryActionLabel": "Download Resume"
+    }
+  },
+  "work": {
+    "eyebrow": "SELECTED WORK",
+    "title": "Featured Work",
+    "description": "Selected professional engineering contributions and complex backend systems I've helped build.",
+    "items": [
+      {
+        "id": "financial-platform",
+        "visible": true,
+        "featured": true,
+        "cover": "/images/projects/financial-platform.webp",
+        "tags": [
+          ".NET",
+          "ABP Framework",
+          "RabbitMQ",
+          "Redis",
+          "Kubernetes"
+        ],
+        "links": [],
+        "title": "Financial Services Platform",
+        "subtitle": "Enterprise Fintech",
+        "summary": "Distributed financial services supporting remittance, accounting, and balance management operations.",
+        "description": "A microservices-based financial platform supporting remittance and other business-critical workflows. My work focused on backend domain services, accounting ledger functionality, and balance tracking.",
+        "role": "Backend Developer",
+        "period": "Dates to confirm",
+        "architecture": [
+          "Microservices",
+          "Domain-Driven Design",
+          "Event-Driven Architecture"
+        ],
+        "challenges": [
+          "Maintaining data consistency across services",
+          "Managing complex financial business rules"
+        ],
+        "contributions": [
+          "Developed backend financial domain services",
+          "Implemented accounting ledger functionality",
+          "Worked on balance tracking and financial workflows"
+        ],
+        "outcomes": []
+      }
+    ]
+  },
+  "lab": {
+    "eyebrow": "PERSONAL PROJECTS",
+    "title": "Engineering Lab",
+    "description": "Personal projects and technical experiments where I explore backend architecture, new technologies, and implementation patterns.",
+    "items": [
+      {
+        "id": "microservices-template",
+        "visible": true,
+        "status": "in-progress",
+        "cover": "/images/lab/microservices.webp",
+        "technologies": [
+          ".NET",
+          "Docker",
+          "RabbitMQ",
+          "Redis"
+        ],
+        "repositoryUrl": "",
+        "demoUrl": "",
+        "title": "Microservices Template",
+        "summary": "A personal template for experimenting with distributed backend architecture.",
+        "description": "An evolving playground for evaluating reusable service patterns and infrastructure choices.",
+        "architecture": [
+          "Microservices"
+        ],
+        "implemented": [],
+        "planned": []
+      },
+      {
+        "id": "7ake",
+        "visible": true,
+        "status": "in-progress",
+        "cover": "/images/lab/7ake.webp",
+        "technologies": [
+          "Laravel",
+          "Filament"
+        ],
+        "repositoryUrl": "",
+        "demoUrl": "",
+        "title": "7ake E-Commerce",
+        "summary": "An e-commerce backend built with Laravel and Filament.",
+        "description": "An ongoing commerce platform exploring product catalogs, inventory, order lifecycles, and payment workflows.",
+        "architecture": [
+          "Modular Backend",
+          "Domain Services"
+        ],
+        "implemented": [
+          "Product catalog administration",
+          "Inventory management",
+          "Checkout and order lifecycle foundations"
+        ],
+        "planned": [
+          "Complete payment and settlement integrations",
+          "Finalize end-to-end purchase flows"
+        ]
+      },
+      {
+        "id": "spring-boot",
+        "visible": true,
+        "status": "experimental",
+        "cover": "/images/lab/spring.webp",
+        "technologies": [
+          "Java",
+          "Spring Boot"
+        ],
+        "repositoryUrl": "",
+        "demoUrl": "",
+        "title": "Spring Boot Lab",
+        "summary": "A Java and Spring Boot learning and architecture playground.",
+        "description": "A space to explore Spring Boot development practices and compare backend approaches.",
+        "architecture": [],
+        "implemented": [],
+        "planned": []
+      }
+    ]
+  },
+  "experience": {
+    "eyebrow": "CAREER",
+    "title": "Professional Experience",
+    "description": "My professional journey developing backend applications and business-critical systems.",
+    "employmentTypes": {
+      "full-time": "Full-time",
+      "part-time": "Part-time",
+      "contract": "Contract",
+      "freelance": "Freelance"
+    },
+    "items": [
+      {
+        "id": "experience-1",
+        "visible": true,
+        "employmentType": "full-time",
+        "startDate": "2023-01",
+        "endDate": null,
+        "current": true,
+        "technologies": [
+          ".NET",
+          "SQL Server",
+          "RabbitMQ",
+          "Docker"
+        ],
+        "companyUrl": "",
+        "company": "Company name to confirm",
+        "position": "Backend Engineer",
+        "location": "Damascus, Syria",
+        "summary": "Developing enterprise backend systems and distributed applications.",
+        "highlights": [
+          "Developed backend services and business workflows",
+          "Worked with distributed architecture and asynchronous messaging",
+          "Implemented financial domain logic"
+        ]
+      }
+    ]
+  },
+  "skills": {
+    "eyebrow": "TECHNICAL EXPERTISE",
+    "title": "Technologies & Architecture",
+    "description": "Tools, frameworks, and architectural approaches I use to build backend systems.",
+    "categories": [
+      {
+        "id": "backend",
+        "visible": true,
+        "title": "Backend Development",
+        "items": [
+          ".NET / C#",
+          "ABP Framework",
+          "Laravel / PHP",
+          "REST APIs",
+          "Entity Framework Core"
+        ]
+      },
+      {
+        "id": "architecture",
+        "visible": true,
+        "title": "Architecture & Patterns",
+        "items": [
+          "Microservices",
+          "Domain-Driven Design",
+          "Event-Driven Architecture",
+          "Clean Architecture"
+        ]
+      },
+      {
+        "id": "data",
+        "visible": true,
+        "title": "Data & Messaging",
+        "items": [
+          "SQL Server",
+          "PostgreSQL",
+          "Redis",
+          "RabbitMQ"
+        ]
+      },
+      {
+        "id": "devops",
+        "visible": true,
+        "title": "DevOps & Infrastructure",
+        "items": [
+          "Docker",
+          "Kubernetes",
+          "AWS",
+          "Nginx"
+        ]
+      },
+      {
+        "id": "frontend",
+        "visible": true,
+        "title": "Frontend & Other Technologies",
+        "items": [
+          "Vue.js",
+          "TypeScript",
+          "JavaScript"
+        ]
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "ABOUT ME",
+    "title": "Engineering Beyond the Code",
+    "paragraphs": [
+      "I'm a software engineer with experience building backend applications and enterprise systems, with a focus on reliable architecture and maintainable business logic.",
+      "Outside professional work, I enjoy exploring technologies, experimenting with architectures, and building personal projects to deepen my engineering knowledge."
+    ]
+  },
+  "contact": {
+    "primaryAction": {
+      "type": "email"
+    },
+    "secondaryAction": {
+      "type": "linkedin"
+    },
+    "eyebrow": "LET'S CONNECT",
+    "title": "Let's Build Something Great.",
+    "description": "Interested in collaborating or discussing a backend engineering opportunity? I'd be happy to connect.",
+    "primaryActionLabel": "Send Me an Email",
+    "secondaryActionLabel": "Connect on LinkedIn"
+  },
+  "footer": {
+    "showCurrentYear": true,
+    "showSocialLinks": true,
+    "showBackToTop": true,
+    "creditsVisible": true,
+    "tagline": "Engineering reliable systems.",
+    "copyrightName": "Omar Agha",
+    "creditsText": "Built with Vue.js · Hosted on GitHub Pages",
+    "backToTopLabel": "Back to top"
+  }
+}

@@ -1,0 +1,350 @@
+{
+  "site": {
+    "name": "Omar Agha",
+    "defaultLocale": "en",
+    "supportedLocales": [
+      "en",
+      "ar"
+    ],
+    "seo": {
+      "title": "Omar Agha | Senior Backend Engineer",
+      "description": "Senior Backend Engineer specializing in distributed systems, microservices, and financial platforms.",
+      "ogImage": "/images/og-cover.webp"
+    },
+    "navigation": {
+      "logoText": "OA.",
+      "items": [
+        {
+          "id": "work",
+          "label": "Featured Work",
+          "href": "#work"
+        },
+        {
+          "id": "lab",
+          "label": "Engineering Lab",
+          "href": "#lab"
+        },
+        {
+          "id": "skills",
+          "label": "Expertise",
+          "href": "#skills"
+        },
+        {
+          "id": "experience",
+          "label": "Experience",
+          "href": "#experience"
+        },
+        {
+          "id": "about",
+          "label": "About",
+          "href": "#about"
+        },
+        {
+          "id": "contact",
+          "label": "Contact",
+          "href": "#contact"
+        }
+      ]
+    },
+    "sections": [
+      {
+        "id": "hero",
+        "visible": true
+      },
+      {
+        "id": "work",
+        "visible": true
+      },
+      {
+        "id": "lab",
+        "visible": true
+      },
+      {
+        "id": "skills",
+        "visible": true
+      },
+      {
+        "id": "experience",
+        "visible": true
+      },
+      {
+        "id": "about",
+        "visible": true
+      },
+      {
+        "id": "contact",
+        "visible": true
+      }
+    ]
+  },
+  "profile": {
+    "name": "Omar Agha",
+    "headline": "Senior Backend Engineer | Distributed Systems & Microservices",
+    "location": "Damascus, Syria",
+    "avatar": "/images/profile.webp",
+    "availability": {
+      "visible": true,
+      "label": "Open to opportunities"
+    },
+    "hero": {
+      "eyebrow": "BACKEND ENGINEERING",
+      "title": "Building systems that scale.",
+      "description": "I build reliable backend services and explore distributed architectures.",
+      "primaryAction": {
+        "label": "Explore My Work",
+        "target": "#work"
+      },
+      "secondaryAction": {
+        "label": "Download Resume",
+        "target": "/resume.pdf"
+      }
+    },
+    "socials": [
+      {
+        "platform": "GitHub",
+        "url": "https://github.com/Omar-Agha",
+        "icon": "github"
+      },
+      {
+        "platform": "LinkedIn",
+        "url": "https://www.linkedin.com/in/eng-omar-agha/",
+        "icon": "linkedin"
+      }
+    ],
+    "stats": [
+      {
+        "label": "Years of experience",
+        "value": "5+"
+      }
+    ]
+  },
+  "work": {
+    "eyebrow": "SELECTED WORK",
+    "title": "Featured Work",
+    "description": "Selected professional engineering contributions.",
+    "items": [
+      {
+        "id": "financial-platform",
+        "featured": true,
+        "title": "Financial Services Platform",
+        "subtitle": "Enterprise fintech backend",
+        "summary": "Distributed services supporting financial workflows.",
+        "description": "",
+        "role": "Backend Engineer",
+        "period": "2023–2026",
+        "cover": "/images/projects/financial-platform.webp",
+        "tags": [
+          ".NET",
+          "ABP",
+          "RabbitMQ",
+          "Kubernetes"
+        ],
+        "architecture": [
+          "Microservices Architecture",
+          "Domain-Driven Design",
+          "Event-Driven Communication"
+        ],
+        "challenges": [
+          "Service communication",
+          "Data consistency"
+        ],
+        "contributions": [
+          "Implemented domain services",
+          "Built event-driven workflows"
+        ],
+        "outcomes": [],
+        "links": [],
+        "gallery": []
+      }
+    ]
+  },
+  "lab": {
+    "eyebrow": "EXPERIMENTS",
+    "title": "Engineering Lab",
+    "description": "Prototypes, experiments and ongoing technical projects.",
+    "statusLabels": {
+      "in-progress": "In Progress",
+      "experimental": "Experimental",
+      "completed": "Completed"
+    },
+    "items": [
+      {
+        "id": "microservices-template",
+        "visible": true,
+        "title": "Microservices Template",
+        "status": "in-progress",
+        "summary": "A reusable architecture experiment.",
+        "technologies": [
+          ".NET",
+          "Docker"
+        ],
+        "implemented": [
+          "Service structure"
+        ],
+        "planned": [
+          "Observability"
+        ],
+        "architecture": [
+          "Clean Architecture",
+          "Domain-Driven Design",
+          "Event-Driven Communication"
+        ],
+        "cover": "/images/lab/microservices.webp",
+        "repositoryUrl": "",
+        "demoUrl": ""
+      },
+      {
+        "id": "7ake",
+        "visible": true,
+        "title": "7ake E-Commerce",
+        "status": "in-progress",
+        "summary": "An e-commerce backend experiment.",
+        "technologies": [
+          "Laravel",
+          "Filament"
+        ],
+        "implemented": [
+          "Catalog module"
+        ],
+        "planned": [
+          "Additional integrations"
+        ],
+        "architecture": [],
+        "cover": "/images/lab/7ake.webp",
+        "repositoryUrl": "",
+        "demoUrl": ""
+      },
+      {
+        "id": "spring-boot",
+        "visible": false,
+        "title": "Spring Boot Lab",
+        "status": "experimental",
+        "summary": "Exploring Java backend development.",
+        "technologies": [
+          "Java",
+          "Spring Boot"
+        ],
+        "architecture": [
+          "Domain-Driven Design"
+        ],
+        "implemented": [],
+        "planned": [],
+        "cover": "/images/lab/spring.webp",
+        "repositoryUrl": "",
+        "demoUrl": ""
+      }
+    ]
+  },
+  "skills": {
+    "eyebrow": "TECHNICAL EXPERTISE",
+    "title": "Technologies & Architecture",
+    "description": "Technologies, tools, and architectural approaches I use to build backend systems.",
+    "categories": [
+      {
+        "id": "backend",
+        "title": "Backend Development",
+        "items": [
+          ".NET / C#",
+          "Laravel / PHP",
+          "REST APIs",
+          "Entity Framework Core"
+        ]
+      },
+      {
+        "id": "architecture",
+        "title": "Architecture & Patterns",
+        "items": [
+          "Microservices",
+          "Domain-Driven Design",
+          "Event-Driven Architecture",
+          "Clean Architecture"
+        ]
+      },
+      {
+        "id": "data",
+        "title": "Data & Messaging",
+        "items": [
+          "SQL Server",
+          "PostgreSQL",
+          "Redis",
+          "RabbitMQ"
+        ]
+      },
+      {
+        "id": "devops",
+        "title": "DevOps & Infrastructure",
+        "items": [
+          "Docker",
+          "Kubernetes",
+          "AWS",
+          "Nginx"
+        ]
+      },
+      {
+        "id": "frontend",
+        "title": "Frontend & Other Technologies",
+        "items": [
+          "Vue.js",
+          "TypeScript",
+          "JavaScript"
+        ]
+      }
+    ]
+  },
+  "experience": {
+    "eyebrow": "CAREER",
+    "title": "Professional Experience",
+    "description": "My professional journey building software systems and backend applications.",
+    "items": [
+      {
+        "id": "experience-1",
+        "visible": true,
+        "company": "Company Name",
+        "position": "Backend Engineer",
+        "employmentType": "Full-time",
+        "location": "Damascus, Syria",
+        "startDate": "2023-01",
+        "endDate": null,
+        "current": true,
+        "summary": "Developing enterprise backend systems and distributed applications.",
+        "highlights": [
+          "Designed and implemented backend services.",
+          "Developed complex business workflows.",
+          "Worked with distributed systems and messaging."
+        ],
+        "technologies": [
+          ".NET",
+          "SQL Server",
+          "RabbitMQ",
+          "Docker"
+        ],
+        "companyUrl": ""
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "ABOUT",
+    "title": "Engineering Beyond the Code",
+    "paragraphs": [
+      "I enjoy solving complex backend problems.",
+      "I value maintainability, clarity and pragmatic architecture."
+    ]
+  },
+  "contact": {
+    "eyebrow": "LET'S CONNECT",
+    "title": "Let's Build Something Great.",
+    "description": "Interested in collaborating or discussing a backend engineering opportunity? I'd be happy to connect.",
+    "primaryAction": {
+      "label": "Send Me an Email",
+      "type": "email"
+    },
+    "secondaryAction": {
+      "label": "Connect on LinkedIn",
+      "type": "linkedin"
+    }
+  },
+  "footer": {
+    "copyright": "© Omar Agha",
+    "backToTopLabel": "Back to top"
+  }
+}
