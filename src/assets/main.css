@@ -798,41 +798,24 @@
     border-radius: 0.55rem;
     background: var(--surface);
   }
-  .lab-cover {
-    width: 100%;
-    aspect-ratio: 2;
-    object-fit: cover;
-    margin-block-end: 1rem;
-    border-radius: 0.25rem;
-  }
   .lab-card-top {
     width: 100%;
     margin-block-end: 1.35rem;
   }
   .lab-glyph {
-    position: relative;
     display: grid;
     place-items: center;
     width: 2.55rem;
     height: 2.55rem;
+    flex: none;
     border: 1px solid var(--accent-line);
     border-radius: 0.35rem;
     color: var(--accent);
     background: #1d2619;
   }
-  .lab-glyph::before {
-    content: '';
-    width: 0.85rem;
-    height: 0.85rem;
-    border: 1px solid currentColor;
-    rotate: 45deg;
-  }
-  .lab-glyph::after {
-    position: absolute;
-    content: '';
-    width: 0.28rem;
-    height: 0.28rem;
-    background: currentColor;
+  .lab-glyph svg {
+    width: 1.25rem;
+    height: 1.25rem;
   }
   .status {
     color: var(--subtle);
@@ -859,6 +842,57 @@
   .lab-card .tags {
     margin-block-start: 1rem;
     margin-block-end: 1.15rem;
+  }
+  .lab-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-self: stretch;
+    gap: 0.25rem 0.75rem;
+    margin-block-start: auto;
+  }
+  .lab-card-actions .card-action {
+    flex: 1 1 auto;
+    gap: 0.45rem;
+    margin-block-start: 0;
+  }
+  .lab-repository {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    min-height: 2.75rem;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    font-weight: 650;
+    transition: color 0.2s ease;
+  }
+  .lab-repository:is(:hover, :focus-visible) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+  }
+  .lab-card:focus-within {
+    opacity: 1 !important;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .lab-card .action-plus {
+      transition-property: color, background, border-color, transform;
+    }
+    .lab-glyph svg,
+    .lab-link-arrow {
+      transition: transform 0.2s ease;
+    }
+    .lab-card:is(:hover, :focus-within) .action-plus {
+      transform: rotate(12deg);
+    }
+    .lab-card:is(:hover, :focus-within) .lab-glyph svg {
+      transform: translateY(-1px);
+    }
+    .lab-repository:is(:hover, :focus-visible) .lab-link-arrow {
+      transform: translate(1px, -1px);
+    }
   }
 
   .tags {
@@ -969,8 +1003,19 @@
   }
 
   .experience-list {
+    position: relative;
     border-inline-start: 1px solid var(--line-strong);
     margin-inline-start: 0.35rem;
+  }
+  .experience-progress {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: -1px;
+    inline-size: 1px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    pointer-events: none;
   }
   .experience-item {
     position: relative;
@@ -979,7 +1024,7 @@
   .experience-item + .experience-item {
     margin-block-start: 2.1rem;
   }
-  .experience-item::before {
+  .experience-marker {
     position: absolute;
     inset-block-start: 0.4rem;
     inset-inline-start: -0.34rem;
@@ -988,7 +1033,24 @@
     border: 1px solid var(--accent);
     border-radius: 50%;
     background: var(--background);
-    content: '';
+    pointer-events: none;
+  }
+  .experience-marker--reached {
+    background: var(--accent);
+  }
+  .experience-marker--pulse {
+    animation: experience-marker-pulse 0.45s ease-out;
+  }
+  @keyframes experience-marker-pulse {
+    from {
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 26%, transparent);
+    }
+    to {
+      box-shadow: 0 0 0 5px transparent;
+    }
+  }
+  .experience-entry:focus-within {
+    opacity: 1 !important;
   }
   .experience-date {
     display: flex;
@@ -1270,6 +1332,10 @@
     color: var(--subtle);
     margin-block-start: 0.65rem;
     font-size: 0.9rem;
+  }
+  .drawer-repository {
+    gap: 0.5rem;
+    margin-block-start: 1rem;
   }
   .drawer-cover {
     width: 100%;

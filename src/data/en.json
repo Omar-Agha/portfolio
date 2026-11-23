@@ -216,7 +216,7 @@
         "id": "7ake",
         "visible": true,
         "status": "in-progress",
-        "cover": "/images/lab/7ake.webp",
+        "cover": "",
         "technologies": [
           "Laravel",
           "Filament"
@@ -263,7 +263,7 @@
   "experience": {
     "eyebrow": "CAREER",
     "title": "Professional Experience",
-    "description": "My professional journey developing backend applications and business-critical systems.",
+    "description": "My professional journey building scalable backend systems, distributed architectures, and production-ready applications.",
     "employmentTypes": {
       "full-time": "Full-time",
       "part-time": "Part-time",
@@ -272,27 +272,57 @@
     },
     "items": [
       {
-        "id": "experience-1",
+        "id": "mis-software-engineer",
         "visible": true,
         "employmentType": "full-time",
-        "startDate": "2023-01",
+        "startDate": "2023-10",
         "endDate": null,
         "current": true,
         "technologies": [
           ".NET",
-          "SQL Server",
+          "ABP Framework",
           "RabbitMQ",
-          "Docker"
+          "SQL Server",
+          "Hangfire",
+          "Blazor"
         ],
         "companyUrl": "",
-        "company": "Company name to confirm",
-        "position": "Backend Engineer",
+        "company": "MIS",
+        "position": "Software Engineer",
         "location": "Damascus, Syria",
-        "summary": "Developing enterprise backend systems and distributed applications.",
+        "summary": "Building enterprise FinTech systems using distributed microservices architecture, supporting 300+ active branches across Syria.",
         "highlights": [
-          "Developed backend services and business workflows",
-          "Worked with distributed architecture and asynchronous messaging",
-          "Implemented financial domain logic"
+          "Contributed to developing and maintaining 20+ microservices using .NET and ABP Framework",
+          "Designed backend APIs and service communication flows following DDD and Clean Architecture principles",
+          "Implemented automated financial workflows and recurring background jobs using Hangfire",
+          "Collaborated on business-critical financial services and enterprise ERP solutions"
+        ]
+      },
+      {
+        "id": "esolution-fullstack-developer",
+        "visible": true,
+        "employmentType": "full-time",
+        "startDate": "2022-08",
+        "endDate": "2023",
+        "current": false,
+        "technologies": [
+          "Laravel",
+          "Filament",
+          "Livewire",
+          "Vue.js",
+          "MySQL",
+          "Firebase"
+        ],
+        "companyUrl": "",
+        "company": "E-solution groups",
+        "position": "Full Stack Developer",
+        "location": "Syria",
+        "summary": "Developed production-ready web applications and multi-tenant SaaS platforms across multiple business domains.",
+        "highlights": [
+          "Delivered 7+ production-ready web applications across multiple business domains",
+          "Designed multi-tenant SaaS platforms with subscription management and role-based access control",
+          "Built backend services and administrative dashboards using Laravel, Filament, and Livewire",
+          "Integrated payment gateways, Firebase notifications, and third-party services"
         ]
       }
     ]

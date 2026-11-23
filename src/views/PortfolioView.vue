@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { computed, nextTick, ref, useTemplateRef, watch, watchEffect } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import EngineeringLab from '../components/EngineeringLab.vue'
 import FeaturedWork from '../components/FeaturedWork.vue'
 import ProfileMark from '../components/ProfileMark.vue'
 import ProjectDrawer, { type ProjectDetail } from '../components/ProjectDrawer.vue'
 import SectionIntro from '../components/SectionIntro.vue'
 import SystemArtwork from '../components/SystemArtwork.vue'
 import TechnologyTags from '../components/TechnologyTags.vue'
+import AmbientBackground from '../components/ui/AmbientBackground.vue'
 import {
   assetUrl,
   content,
@@ -19,6 +22,8 @@ import {
   presentItems,
   webUrl,
 } from '../content'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const route = useRoute()
 const locale = computed(() => (isLocale(route.meta.locale) ? route.meta.locale : defaultLocale))
@@ -37,6 +42,8 @@ const labels = computed(() =>
         navigation: 'التنقل الرئيسي',
         skip: 'انتقل إلى المحتوى',
         project: 'استعرض المشروع',
+        viewOnGitHub: 'عرض على GitHub',
+        newTab: '(يفتح في تبويب جديد)',
         email: 'البريد الإلكتروني',
       }
     : {
@@ -44,6 +51,8 @@ const labels = computed(() =>
         navigation: 'Main navigation',
         skip: 'Skip to content',
         project: 'Explore Project',
+        viewOnGitHub: 'View on GitHub',
+        newTab: '(opens in a new tab)',
         email: 'Email',
       },
 )
@@ -165,6 +174,81 @@ watch(
     })
 
     onCleanup(() => motion.revert())
+  },
+  { flush: 'post' },
+)
+
+watch(
+  [mainContent, experience],
+  ([main], _, onCleanup) => {
+    const list = main?.querySelector('#experience .experience-list')
+    const line = list?.querySelector('.experience-progress')
+    if (!list || !line) return
+
+    const motion = gsap.matchMedia(list)
+    onCleanup(() => motion.revert())
+    motion.add('(prefers-reduced-motion: no-preference)', () => {
+      const markers = [...list.querySelectorAll('.experience-marker')]
+      let markerStops: number[] = []
+      let refreshing = false
+      const fill = gsap.fromTo(
+        line,
+        { scaleY: 0 },
+        { scaleY: 1, duration: 1, ease: 'none', paused: true },
+      )
+
+      const updateMarkers = (pulse: boolean) => {
+        const progress = fill.progress()
+        markers.forEach((marker, index) => {
+          const reached = progress >= (markerStops[index] ?? 1)
+          if (marker.classList.contains('experience-marker--reached') === reached) return
+
+          marker.classList.toggle('experience-marker--reached', reached)
+          marker.classList.toggle('experience-marker--pulse', reached && pulse)
+        })
+      }
+
+      ScrollTrigger.create({
+        animation: fill,
+        trigger: list,
+        start: 'top 55%',
+        end: 'bottom 55%',
+        scrub: 0.2,
+        onRefreshInit: () => {
+          refreshing = true
+        },
+        onRefresh: ({ progress }) => {
+          const bounds = list.getBoundingClientRect()
+          markerStops = markers.map((marker) => {
+            const { top, height } = marker.getBoundingClientRect()
+            return (top + height / 2 - bounds.top) / bounds.height
+          })
+          fill.progress(progress, true)
+          updateMarkers(false)
+          refreshing = false
+        },
+      })
+      // Follow the rendered line while the scrub catches up to the scroll position.
+      fill.eventCallback('onUpdate', () => updateMarkers(!refreshing))
+
+      list.querySelectorAll('.experience-entry').forEach((entry) => {
+        gsap.from(entry, {
+          scrollTrigger: { trigger: entry.parentElement, start: 'top 96%', once: true },
+          opacity: 0.65,
+          y: 7,
+          duration: 0.4,
+          ease: 'power2.out',
+          immediateRender: false,
+          clearProps: 'opacity,transform',
+        })
+      })
+
+      return () => {
+        markers.forEach((marker) => {
+          marker.classList.remove('experience-marker--reached', 'experience-marker--pulse')
+        })
+      }
+    })
   },
   { flush: 'post' },
 )
@@ -368,8 +452,11 @@ const detail = computed<ProjectDetail | null>(() => {
   return {
     title: project.title,
     subtitle: project.status ? text.status[project.status] : undefined,
-    description: project.description || project.summary,
+    description: project.description?.trim() || project.summary?.trim(),
     cover: assetUrl(project.cover),
+    repository: repository
+      ? { href: repository, label: labels.value.viewOnGitHub, newTab: labels.value.newTab }
+      : undefined,
     meta: [],
     tags: nonblank(project.technologies),
     groups: [
@@ -377,10 +464,7 @@ const detail = computed<ProjectDetail | null>(() => {
       { title: text.implemented, items: nonblank(project.implemented) },
       { title: text.planned, items: nonblank(project.planned) },
     ],
-    links: [
-      ...(repository ? [{ label: text.viewRepository, href: repository }] : []),
-      ...(demo ? [{ label: text.viewDemo, href: demo }] : []),
-    ],
+    links: demo ? [{ label: text.viewDemo, href: demo }] : [],
   }
 })
 
@@ -532,66 +616,29 @@ watchEffect(() => {
         @open="(event, id) => openProject(event, 'work', id)"
       />
 
-      <section
+      <EngineeringLab
         v-else-if="section.id === 'lab'"
-        id="lab"
-        class="shell portfolio-section"
-        tabindex="-1"
-      >
-        <SectionIntro
-          :eyebrow="copy.lab.eyebrow"
-          :title="copy.lab.title"
-          :description="copy.lab.description"
-        />
-        <div class="lab-grid">
-          <article v-for="project in lab" :key="project.id" class="lab-card interactive-card">
-            <img
-              v-if="assetUrl(project.cover)"
-              :src="assetUrl(project.cover)"
-              alt=""
-              class="lab-cover"
-              loading="lazy"
-            />
-            <div class="lab-card-top flex items-center justify-between gap-3">
-              <span class="lab-glyph" aria-hidden="true"></span>
-              <span
-                v-if="project.status && ui.status[project.status]"
-                class="status"
-                :class="`status--${project.status}`"
-                ><bdi>{{ ui.status[project.status] }}</bdi></span
-              >
-            </div>
-            <h3 :id="`lab-title-${project.id}`">
-              <bdi>{{ project.title }}</bdi>
-            </h3>
-            <p v-if="project.summary" class="card-summary">{{ project.summary }}</p>
-            <TechnologyTags :items="project.technologies" />
-            <button
-              type="button"
-              class="card-action"
-              :aria-labelledby="`lab-action-${project.id} lab-title-${project.id}`"
-              aria-haspopup="dialog"
-              @click="openProject($event, 'lab', project.id)"
-            >
-              <span :id="`lab-action-${project.id}`">{{ labels.project }}</span
-              ><span class="action-plus" aria-hidden="true">+</span>
-            </button>
-          </article>
-        </div>
-      </section>
+        :intro="copy.lab"
+        :projects="lab"
+        :labels="labels"
+        :statuses="ui.status"
+        @open="(event, id) => openProject(event, 'lab', id)"
+      />
 
       <section
         v-else-if="section.id === 'skills'"
         id="skills"
-        class="shell portfolio-section section-split"
+        class="shell portfolio-section section-split relative isolate"
         tabindex="-1"
       >
+        <AmbientBackground />
         <SectionIntro
+          class="relative z-10"
           :eyebrow="copy.skills.eyebrow"
           :title="copy.skills.title"
           :description="copy.skills.description"
         />
-        <div class="skill-list">
+        <div class="skill-list relative z-10">
           <div v-for="category in skills" :key="category.id" class="skill-row">
             <h3>{{ category.title }}</h3>
             <TechnologyTags :items="category.items" />
@@ -605,42 +652,52 @@ watchEffect(() => {
         class="shell portfolio-section section-split"
         tabindex="-1"
       >
-        <SectionIntro
-          :eyebrow="copy.experience.eyebrow"
-          :title="copy.experience.title"
-          :description="copy.experience.description"
-        />
+        <div class="relative isolate">
+          <AmbientBackground :intensity="0.045" :count="2" />
+          <SectionIntro
+            class="relative z-10"
+            :eyebrow="copy.experience.eyebrow"
+            :title="copy.experience.title"
+            :description="copy.experience.description"
+          />
+        </div>
         <div class="experience-list">
+          <span class="experience-progress" aria-hidden="true"></span>
           <article v-for="job in experience" :key="job.id" class="experience-item">
-            <p v-if="job.startDate || job.endDate || job.current" class="experience-date">
-              <time v-if="job.startDate" :datetime="job.startDate">{{
-                formatMonth(job.startDate)
-              }}</time>
-              <span v-if="job.startDate && (job.current || job.endDate)" aria-hidden="true">—</span>
-              <span v-if="job.current">{{ ui.present }}</span>
-              <time v-else-if="job.endDate" :datetime="job.endDate">{{
-                formatMonth(job.endDate)
-              }}</time>
-            </p>
-            <h3>{{ job.position }}</h3>
-            <div v-if="job.company || job.employmentType || job.location" class="experience-meta">
-              <a v-if="job.company && webUrl(job.companyUrl)" :href="webUrl(job.companyUrl)">{{
-                job.company
-              }}</a>
-              <bdi v-else-if="job.company">{{ job.company }}</bdi>
-              <span
-                v-if="job.employmentType && copy.experience.employmentTypes[job.employmentType]"
-                >{{ copy.experience.employmentTypes[job.employmentType] }}</span
-              >
-              <span v-if="job.location">{{ job.location }}</span>
+            <span class="experience-marker" aria-hidden="true"></span>
+            <div class="experience-entry">
+              <p v-if="job.startDate || job.endDate || job.current" class="experience-date">
+                <time v-if="job.startDate" :datetime="job.startDate">{{
+                  formatMonth(job.startDate)
+                }}</time>
+                <span v-if="job.startDate && (job.current || job.endDate)" aria-hidden="true"
+                  >—</span
+                >
+                <span v-if="job.current">{{ ui.present }}</span>
+                <time v-else-if="job.endDate" :datetime="job.endDate">{{
+                  formatMonth(job.endDate)
+                }}</time>
+              </p>
+              <h3>{{ job.position }}</h3>
+              <div v-if="job.company || job.employmentType || job.location" class="experience-meta">
+                <a v-if="job.company && webUrl(job.companyUrl)" :href="webUrl(job.companyUrl)">{{
+                  job.company
+                }}</a>
+                <bdi v-else-if="job.company">{{ job.company }}</bdi>
+                <span
+                  v-if="job.employmentType && copy.experience.employmentTypes[job.employmentType]"
+                  >{{ copy.experience.employmentTypes[job.employmentType] }}</span
+                >
+                <span v-if="job.location">{{ job.location }}</span>
+              </div>
+              <p v-if="job.summary" class="experience-summary">{{ job.summary }}</p>
+              <ul v-if="nonblank(job.highlights).length" class="bullets" role="list">
+                <li v-for="highlight in nonblank(job.highlights)" :key="highlight">
+                  {{ highlight }}
+                </li>
+              </ul>
+              <TechnologyTags :items="job.technologies" />
             </div>
-            <p v-if="job.summary" class="experience-summary">{{ job.summary }}</p>
-            <ul v-if="nonblank(job.highlights).length" class="bullets" role="list">
-              <li v-for="highlight in nonblank(job.highlights)" :key="highlight">
-                {{ highlight }}
-              </li>
-            </ul>
-            <TechnologyTags :items="job.technologies" />
           </article>
         </div>
       </section>

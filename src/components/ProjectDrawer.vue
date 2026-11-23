@@ -8,6 +8,7 @@ export type ProjectDetail = {
   subtitle?: string
   description?: string
   cover?: string
+  repository?: { href: string; label: string; newTab: string }
   meta: string[]
   tags: string[]
   groups: { title: string; items: string[] }[]
@@ -76,6 +77,17 @@ watch(
           <bdi v-for="value in project.meta" :key="value">{{ value }}</bdi>
         </p>
       </div>
+      <a
+        v-if="project.repository"
+        :href="project.repository.href"
+        class="button button--primary drawer-repository"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>{{ project.repository.label }}</span
+        ><span aria-hidden="true">↗</span>
+        <span class="sr-only">{{ project.repository.newTab }}</span>
+      </a>
       <img v-if="project.cover" :src="project.cover" alt="" class="drawer-cover" />
       <section v-if="project.description" class="drawer-section">
         <h3>{{ labels.overview }}</h3>
