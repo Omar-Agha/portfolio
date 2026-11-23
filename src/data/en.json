@@ -100,7 +100,7 @@
     "socials": {
       "github": "https://github.com/Omar-Agha",
       "linkedin": "https://www.linkedin.com/in/eng-omar-agha/",
-      "email": ""
+      "email": "omar.tamer982@gm"
     },
     "name": "Omar Agha",
     "headline": "Senior Backend Engineer | Distributed Systems & Microservices",
@@ -163,6 +163,24 @@
           "Implemented accounting ledger functionality",
           "Worked on balance tracking and financial workflows"
         ],
+        "outcomes": []
+      },
+      {
+        "id": "future-gym",
+        "visible": true,
+        "featured": false,
+        "cover": "/images/lab/7ake.webp",
+        "tags": [],
+        "links": [],
+        "title": "Future Gym",
+        "subtitle": "Fitness Management Platform",
+        "summary": "A fitness-focused platform designed to support gym operations and member management.",
+        "description": "Future Gym is a fitness management project focused on supporting gym-related workflows and providing a streamlined experience for managing fitness services.",
+        "role": "Developer",
+        "period": "",
+        "architecture": [],
+        "challenges": [],
+        "contributions": [],
         "outcomes": []
       }
     ]

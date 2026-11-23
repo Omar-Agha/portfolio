@@ -16,12 +16,22 @@ defineProps<{ variant: 'hero' | 'work' }>()
           :class="`assembly-plane--${layer}`"
         >
           <i v-for="node in 4" :key="node"></i>
+          <span v-if="layer === 3" class="assembly-signal"></span>
         </div>
       </div>
     </template>
     <div v-else class="circuit">
       <div class="circuit-bus"></div>
-      <div v-for="branch in 3" :key="branch" class="circuit-branch"><i></i><i></i></div>
+      <div v-for="branch in 3" :key="branch" class="circuit-branch">
+        <svg class="circuit-link" viewBox="0 0 100 4" preserveAspectRatio="none">
+          <path class="circuit-line" d="M0 2H100" vector-effect="non-scaling-stroke" />
+        </svg>
+        <span class="circuit-junction"></span>
+        <div v-for="node in 2" :key="node" class="circuit-node">
+          <span class="circuit-receipt"></span>
+        </div>
+        <span v-if="branch !== 2" class="circuit-signal"></span>
+      </div>
     </div>
   </div>
 </template>

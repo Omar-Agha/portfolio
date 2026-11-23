@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, useTemplateRef, watchEffect } from 'vue'
+import { gsap } from 'gsap'
+import { computed, nextTick, ref, useTemplateRef, watch, watchEffect } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import FeaturedWork from '../components/FeaturedWork.vue'
+import ProfileMark from '../components/ProfileMark.vue'
 import ProjectDrawer, { type ProjectDetail } from '../components/ProjectDrawer.vue'
 import SectionIntro from '../components/SectionIntro.vue'
 import SystemArtwork from '../components/SystemArtwork.vue'
@@ -72,6 +75,151 @@ const navigation = computed(() =>
 const menuOpen = ref(false)
 const menuButton = useTemplateRef('menuButton')
 const navigationElement = useTemplateRef('navigationElement')
+const siteHeader = useTemplateRef('siteHeader')
+const mainContent = useTemplateRef('mainContent')
+const activeSectionId = ref<string>()
+
+watch(
+  [mainContent, locale],
+  ([main], _, onCleanup) => {
+    const heroSection = main?.querySelector('#hero')
+    const heroCopy = heroSection?.querySelector('.hero-copy')
+    const heroArt = heroSection?.querySelector('.system-art--hero')
+    if (!heroSection || !heroCopy || !heroArt) return
+
+    const motion = gsap.matchMedia(heroSection)
+    motion.add('(prefers-reduced-motion: no-preference)', () => {
+      const copyEntrance = gsap.timeline({ paused: true, defaults: { ease: 'power2.out' } })
+      copyEntrance.from('h1', {
+        opacity: 0,
+        y: 12,
+        duration: 0.55,
+        clearProps: 'opacity,transform',
+      })
+
+      const details = heroCopy.querySelectorAll('.hero-description, .hero-actions > a')
+      if (details.length) {
+        copyEntrance.from(
+          details,
+          { opacity: 0, duration: 0.4, stagger: 0.08, clearProps: 'opacity' },
+          0.18,
+        )
+      }
+
+      const artEntrance = gsap.timeline({ paused: true, defaults: { ease: 'power2.out' } })
+      artEntrance
+        .from('.assembly-axis', { opacity: 0, duration: 0.45, clearProps: 'opacity' })
+        .from(
+          '.assembly-plane',
+          {
+            opacity: 0,
+            '--plane-reveal-y': '8px',
+            duration: 0.55,
+            stagger: 0.12,
+            clearProps: 'opacity,--plane-reveal-y',
+          },
+          0.12,
+        )
+        .addLabel('float')
+        .to('.assembly', {
+          '--assembly-float-y': '-4px',
+          ease: 'sine.inOut',
+          duration: 1.8,
+          repeat: -1,
+          yoyo: true,
+        })
+
+      const orbit = gsap.timeline({
+        defaults: { duration: 0.76, ease: 'none' },
+        repeat: -1,
+        repeatDelay: 1.4,
+      })
+      orbit
+        .to('.assembly-signal', { opacity: 0.95, duration: 0.16 }, 0)
+        .to('.assembly-signal', { xPercent: 100 }, 0)
+        .to('.assembly-signal', { yPercent: 100 })
+        .to('.assembly-signal', { xPercent: 0 })
+        .to('.assembly-signal', { yPercent: 0 })
+        .to('.assembly-signal', { opacity: 0, duration: 0.16 }, '-=0.16')
+      artEntrance.add(orbit, 'float+=0.2')
+
+      // The illustration may start below the fold on mobile.
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const visible = entry.intersectionRatio >= 0.12
+            if (entry.target === heroArt) {
+              artEntrance.paused(!visible)
+            } else if (visible) {
+              copyEntrance.play()
+              observer.unobserve(entry.target)
+            }
+          }
+        },
+        { threshold: 0.12 },
+      )
+      observer.observe(heroCopy)
+      observer.observe(heroArt)
+
+      return () => observer.disconnect()
+    })
+
+    onCleanup(() => motion.revert())
+  },
+  { flush: 'post' },
+)
+
+watchEffect(
+  (onCleanup) => {
+    const header = siteHeader.value
+    const main = mainContent.value
+    const scrollRoot = document.scrollingElement
+    if (!header || !main || !scrollRoot) return
+
+    const sectionsFromBottom = sections.value
+      .map(({ id }) => document.getElementById(id))
+      .filter((section) => section !== null)
+      .reverse()
+    let frame: number | undefined
+
+    const scheduleUpdate = () => {
+      if (frame !== undefined) return
+      frame = requestAnimationFrame(() => {
+        frame = undefined
+        const { scrollTop, scrollHeight, clientHeight } = scrollRoot
+
+        // A short final section may never reach the activation line.
+        if (scrollTop > 0 && scrollTop + clientHeight >= scrollHeight - 1) {
+          activeSectionId.value = sectionsFromBottom[0]?.id
+          return
+        }
+
+        const activationLine = Math.max(
+          header.getBoundingClientRect().bottom + 16,
+          clientHeight / 4,
+        )
+        activeSectionId.value = sectionsFromBottom.find(
+          (section) => section.getBoundingClientRect().top <= activationLine,
+        )?.id
+      })
+    }
+
+    const resizeObserver = new ResizeObserver(scheduleUpdate)
+    resizeObserver.observe(header)
+    resizeObserver.observe(main)
+    window.addEventListener('scroll', scheduleUpdate, { passive: true })
+    window.addEventListener('resize', scheduleUpdate)
+    scheduleUpdate()
+
+    onCleanup(() => {
+      resizeObserver.disconnect()
+      window.removeEventListener('scroll', scheduleUpdate)
+      window.removeEventListener('resize', scheduleUpdate)
+      if (frame !== undefined) cancelAnimationFrame(frame)
+    })
+  },
+  { flush: 'post' },
+)
 
 async function toggleMenu() {
   if (menuOpen.value) {
@@ -270,14 +418,20 @@ watchEffect(() => {
     labels.skip
   }}</RouterLink>
   <div id="top" class="page-top" tabindex="-1"></div>
-  <header class="site-header" @keydown.esc="closeMenu">
+  <header ref="siteHeader" class="site-header" @keydown.esc="closeMenu">
     <div class="shell masthead flex items-center justify-between">
       <RouterLink
         :to="sectionLink('#top')"
         class="brand flex items-center"
+        :aria-label="profile.name || copy.site.logoText"
         @click="activateAnchor('#top')"
       >
-        <bdi class="brand-mark">{{ copy.site.logoText }}</bdi>
+        <ProfileMark
+          class="brand-mark"
+          mode="image"
+          :text="copy.site.logoText"
+          :image-src="avatar"
+        />
         <span v-if="profile.name" class="brand-name">{{ profile.name }}</span>
       </RouterLink>
       <nav
@@ -292,8 +446,8 @@ watchEffect(() => {
           v-for="item in navigation"
           :key="item.id"
           :to="sectionLink(item.href)"
-          :class="{ 'nav-current': route.hash === item.href }"
-          :aria-current="route.hash === item.href ? 'location' : undefined"
+          :class="{ 'nav-current': activeSectionId === item.id }"
+          :aria-current="activeSectionId === item.id ? 'location' : undefined"
           @click="activateAnchor(item.href)"
           >{{ item.label }}</RouterLink
         >
@@ -324,7 +478,7 @@ watchEffect(() => {
     </div>
   </header>
 
-  <main id="main" tabindex="-1">
+  <main id="main" ref="mainContent" tabindex="-1">
     <template v-for="section in sections" :key="section.id">
       <section v-if="section.id === 'hero'" id="hero" class="shell hero" tabindex="-1">
         <div class="hero-copy">
@@ -370,54 +524,13 @@ watchEffect(() => {
         <SystemArtwork variant="hero" />
       </section>
 
-      <section
+      <FeaturedWork
         v-else-if="section.id === 'work'"
-        id="work"
-        class="shell portfolio-section"
-        tabindex="-1"
-      >
-        <SectionIntro
-          :eyebrow="copy.work.eyebrow"
-          :title="copy.work.title"
-          :description="copy.work.description"
-        />
-        <div class="work-list">
-          <article
-            v-for="project in work"
-            :key="project.id"
-            class="work-card interactive-card"
-            :class="{ 'work-card--featured': project.featured }"
-          >
-            <div class="work-copy">
-              <p v-if="project.subtitle" class="eyebrow" dir="auto">{{ project.subtitle }}</p>
-              <h3 :id="`work-title-${project.id}`">
-                <bdi>{{ project.title }}</bdi>
-              </h3>
-              <p v-if="project.summary" class="card-summary">{{ project.summary }}</p>
-              <TechnologyTags :items="project.tags" />
-              <button
-                type="button"
-                class="card-action"
-                :aria-labelledby="`work-action-${project.id} work-title-${project.id}`"
-                aria-haspopup="dialog"
-                @click="openProject($event, 'work', project.id)"
-              >
-                <span :id="`work-action-${project.id}`">{{ ui.viewDetails }}</span
-                ><span class="action-plus" aria-hidden="true">+</span>
-              </button>
-            </div>
-            <div class="work-visual">
-              <img
-                v-if="assetUrl(project.cover)"
-                :src="assetUrl(project.cover)"
-                alt=""
-                loading="lazy"
-              />
-              <SystemArtwork v-else variant="work" />
-            </div>
-          </article>
-        </div>
-      </section>
+        :intro="copy.work"
+        :projects="work"
+        :action-label="ui.viewDetails"
+        @open="(event, id) => openProject(event, 'work', id)"
+      />
 
       <section
         v-else-if="section.id === 'lab'"
@@ -547,16 +660,14 @@ watchEffect(() => {
           <p v-for="paragraph in about" :key="paragraph">{{ paragraph }}</p>
         </div>
         <div class="identity-card">
-          <img
-            v-if="avatar"
-            :src="avatar"
-            alt=""
-            width="112"
-            height="112"
+          <ProfileMark
+            class="identity-mark"
+            mode="image"
+            :text="copy.site.logoText"
+            :image-src="avatar"
             loading="lazy"
-            class="identity-avatar"
+            aria-hidden="true"
           />
-          <bdi v-else class="identity-monogram" aria-hidden="true">{{ copy.site.logoText }}</bdi>
           <p class="identity-name">{{ profile.name }}</p>
           <p v-for="line in headline" :key="line" class="identity-headline">{{ line }}</p>
           <p v-if="profile.location" class="location identity-location">
@@ -577,6 +688,7 @@ watchEffect(() => {
             :title="copy.contact.title"
             :description="copy.contact.description"
           />
+          
           <div v-if="contactActions.length" class="contact-actions flex flex-wrap gap-3">
             <a
               v-for="(action, index) in contactActions"
@@ -596,7 +708,12 @@ watchEffect(() => {
     <div class="shell footer-content">
       <div>
         <div class="footer-brand flex items-center gap-3">
-          <bdi class="brand-mark">{{ copy.site.logoText }}</bdi>
+          <ProfileMark
+            class="brand-mark"
+            mode="image"
+            :text="copy.site.logoText"
+            :image-src="avatar"
+          />
           <p v-if="copy.footer.tagline">{{ copy.footer.tagline }}</p>
         </div>
         <p v-if="copy.footer.copyrightName || copy.footer.showCurrentYear" class="copyright">
