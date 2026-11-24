@@ -57,6 +57,25 @@ export type LabProject = ProjectBase & {
   planned?: string[]
 }
 
+export type ExperienceContent = Introduction & {
+  employmentTypes: Record<string, string>
+  items: {
+    id: string
+    visible?: boolean
+    position: string
+    employmentType?: string
+    startDate?: string
+    endDate?: string | null
+    current?: boolean
+    company?: string
+    companyUrl?: string
+    location?: string
+    summary?: string
+    highlights?: string[]
+    technologies?: string[]
+  }[]
+}
+
 type PortfolioContent = {
   site: {
     defaultLocale: string
@@ -87,24 +106,7 @@ type PortfolioContent = {
   skills: Introduction & {
     categories: { id: string; visible?: boolean; title: string; items: string[] }[]
   }
-  experience: Introduction & {
-    employmentTypes: Record<string, string>
-    items: {
-      id: string
-      visible?: boolean
-      position: string
-      employmentType?: string
-      startDate?: string
-      endDate?: string | null
-      current?: boolean
-      company?: string
-      companyUrl?: string
-      location?: string
-      summary?: string
-      highlights?: string[]
-      technologies?: string[]
-    }[]
-  }
+  experience: ExperienceContent
   about: AboutContent
   contact: ContactContent
   footer: {
