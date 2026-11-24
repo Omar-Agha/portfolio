@@ -263,7 +263,7 @@
   "experience": {
     "eyebrow": "CAREER",
     "title": "Professional Experience",
-    "description": "My professional journey building scalable backend systems, distributed architectures, and production-ready applications.",
+    "description": "My journey from building full-stack applications and SaaS products to engineering distributed financial systems.",
     "employmentTypes": {
       "full-time": "Full-time",
       "part-time": "Part-time",
@@ -283,19 +283,21 @@
           "ABP Framework",
           "RabbitMQ",
           "SQL Server",
+          "Redis",
+          "Kubernetes",
           "Hangfire",
-          "Blazor"
+          "Azure DevOps"
         ],
         "companyUrl": "",
         "company": "MIS",
         "position": "Software Engineer",
         "location": "Damascus, Syria",
-        "summary": "Building enterprise FinTech systems using distributed microservices architecture, supporting 300+ active branches across Syria.",
+        "summary": "Engineering enterprise financial systems within a distributed microservices platform supporting 300+ active branches across Syria.",
         "highlights": [
-          "Contributed to developing and maintaining 20+ microservices using .NET and ABP Framework",
-          "Designed backend APIs and service communication flows following DDD and Clean Architecture principles",
-          "Implemented automated financial workflows and recurring background jobs using Hangfire",
-          "Collaborated on business-critical financial services and enterprise ERP solutions"
+          "Contributed to the development and maintenance of 20+ microservices using .NET and ABP Framework.",
+          "Designed backend services and modeled complex business domains using Domain-Driven Design and Clean Architecture.",
+          "Implemented core financial modules, including accounting ledgers, trading ledgers, and balance tracking.",
+          "Developed inter-service communication and automated financial workflows using RabbitMQ and Hangfire."
         ]
       },
       {
@@ -307,52 +309,69 @@
         "current": false,
         "technologies": [
           "Laravel",
+          "PHP",
           "Filament",
           "Livewire",
           "Vue.js",
           "MySQL",
-          "Firebase"
+          "Firebase",
+          "Stripe"
         ],
         "companyUrl": "",
         "company": "E-solution groups",
         "position": "Full Stack Developer",
         "location": "Syria",
-        "summary": "Developed production-ready web applications and multi-tenant SaaS platforms across multiple business domains.",
+        "summary": "Built end-to-end web applications and multi-tenant SaaS products across multiple business domains, from requirements analysis to production delivery.",
         "highlights": [
-          "Delivered 7+ production-ready web applications across multiple business domains",
-          "Designed multi-tenant SaaS platforms with subscription management and role-based access control",
-          "Built backend services and administrative dashboards using Laravel, Filament, and Livewire",
-          "Integrated payment gateways, Firebase notifications, and third-party services"
+          "Contributed to the delivery of 7+ production web applications across multiple business domains.",
+          "Designed multi-tenant SaaS architectures with tenant-specific data isolation, subscription management, and role-based access control.",
+          "Developed database schemas, REST APIs, and administrative dashboards using Laravel, Filament, and Livewire.",
+          "Integrated Stripe and Midtrans payment gateways, Firebase notifications, and third-party services."
         ]
       }
     ]
   },
   "skills": {
     "eyebrow": "TECHNICAL EXPERTISE",
-    "title": "Technologies & Architecture",
-    "description": "Tools, frameworks, and architectural approaches I use to build backend systems.",
+    "title": "Engineering Toolkit",
+    "description": "Technologies, architectural patterns, and engineering practices I use to build reliable, scalable software systems.",
     "categories": [
       {
         "id": "backend",
         "visible": true,
-        "title": "Backend Development",
+        "title": "Backend Engineering",
         "items": [
           ".NET / C#",
+          "ASP.NET Core",
           "ABP Framework",
           "Laravel / PHP",
-          "REST APIs",
+          "Node.js / NestJS",
           "Entity Framework Core"
         ]
       },
       {
         "id": "architecture",
         "visible": true,
-        "title": "Architecture & Patterns",
+        "title": "Software Architecture",
         "items": [
           "Microservices",
           "Domain-Driven Design",
+          "Clean Architecture",
           "Event-Driven Architecture",
-          "Clean Architecture"
+          "Multi-Tenant Architecture"
+        ]
+      },
+      {
+        "id": "distributed-systems",
+        "visible": true,
+        "title": "Distributed Systems & Reliability",
+        "items": [
+          "Idempotency",
+          "Distributed Locking",
+          "Optimistic Concurrency Control",
+          "Durable Workflows",
+          "Circuit Breakers",
+          "Compensating Transactions"
         ]
       },
       {
@@ -362,6 +381,8 @@
         "items": [
           "SQL Server",
           "PostgreSQL",
+          "MySQL",
+          "MongoDB",
           "Redis",
           "RabbitMQ"
         ]
@@ -369,22 +390,26 @@
       {
         "id": "devops",
         "visible": true,
-        "title": "DevOps & Infrastructure",
+        "title": "Infrastructure & Delivery",
         "items": [
           "Docker",
           "Kubernetes",
+          "Azure",
           "AWS",
-          "Nginx"
+          "CI/CD"
         ]
       },
       {
-        "id": "frontend",
+        "id": "complementary",
         "visible": true,
-        "title": "Frontend & Other Technologies",
+        "title": "Complementary Expertise",
         "items": [
+          "OAuth 2.0 / OpenID Connect",
+          "OpenIddict",
+          "Unit & Integration Testing",
           "Vue.js",
           "TypeScript",
-          "JavaScript"
+          "Blazor"
         ]
       }
     ]
