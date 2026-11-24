@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { computed, nextTick, ref, useTemplateRef, watch, watchEffect } from 'vue'
+import { computed, ref, useTemplateRef, watch, watchEffect } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import AboutSection from '../components/AboutSection.vue'
 import ContactSection from '../components/ContactSection.vue'
@@ -10,6 +10,7 @@ import FeaturedWork from '../components/FeaturedWork.vue'
 import ProfileMark from '../components/ProfileMark.vue'
 import ProjectDrawer, { type ProjectDetail } from '../components/ProjectDrawer.vue'
 import SectionIntro from '../components/SectionIntro.vue'
+import SiteHeader from '../components/SiteHeader.vue'
 import SystemArtwork from '../components/SystemArtwork.vue'
 import TechnologyTags from '../components/TechnologyTags.vue'
 import AmbientBackground from '../components/ui/AmbientBackground.vue'
@@ -19,7 +20,6 @@ import {
   defaultLocale,
   emailUrl,
   isLocale,
-  localePaths,
   nonblank,
   presentItems,
   webUrl,
@@ -33,23 +33,15 @@ const copy = computed(() => content[locale.value])
 const ui = computed(() => copy.value.site.ui)
 const profile = computed(() => copy.value.profile)
 const hero = computed(() => profile.value.hero)
-const alternate = computed(() =>
-  copy.value.site.supportedLocales.find((code) => isLocale(code) && code !== locale.value),
-)
-const languageNames = { en: 'English', ar: 'العربية' }
 const labels = computed(() =>
   locale.value === 'ar'
     ? {
-        menu: 'القائمة',
-        navigation: 'التنقل الرئيسي',
         skip: 'انتقل إلى المحتوى',
         project: 'استعرض المشروع',
         viewOnGitHub: 'عرض على GitHub',
         newTab: '(يفتح في تبويب جديد)',
       }
     : {
-        menu: 'Menu',
-        navigation: 'Main navigation',
         skip: 'Skip to content',
         project: 'Explore Project',
         viewOnGitHub: 'View on GitHub',
@@ -75,14 +67,6 @@ const sections = computed(() => {
   }
   return copy.value.site.sections.filter((section) => section.visible && available[section.id])
 })
-const navigation = computed(() =>
-  copy.value.site.navigation.filter((item) =>
-    sections.value.some((section) => section.id === item.id),
-  ),
-)
-const menuOpen = ref(false)
-const menuButton = useTemplateRef('menuButton')
-const navigationElement = useTemplateRef('navigationElement')
 const siteHeader = useTemplateRef('siteHeader')
 const mainContent = useTemplateRef('mainContent')
 const activeSectionId = ref<string>()
@@ -254,7 +238,7 @@ watch(
 
 watchEffect(
   (onCleanup) => {
-    const header = siteHeader.value
+    const header = siteHeader.value?.element
     const main = mainContent.value
     const scrollRoot = document.scrollingElement
     if (!header || !main || !scrollRoot) return
@@ -304,28 +288,12 @@ watchEffect(
   { flush: 'post' },
 )
 
-async function toggleMenu() {
-  if (menuOpen.value) {
-    closeMenu()
-    return
-  }
-  menuOpen.value = true
-  await nextTick()
-  navigationElement.value?.querySelector('a')?.focus()
-}
-
-function closeMenu() {
-  if (!menuOpen.value) return
-  menuOpen.value = false
-  menuButton.value?.focus()
-}
-
 function sectionLink(hash: string) {
   return { path: route.path, query: route.query, hash }
 }
 
 function activateAnchor(hash: string) {
-  closeMenu()
+  siteHeader.value?.closeMenu()
   if (route.hash === hash) {
     const target = document.getElementById(hash.slice(1))
     target?.focus({ preventScroll: true })
@@ -487,65 +455,14 @@ watchEffect(() => {
     labels.skip
   }}</RouterLink>
   <div id="top" class="page-top" tabindex="-1"></div>
-  <header ref="siteHeader" class="site-header" @keydown.esc="closeMenu">
-    <div class="shell masthead flex items-center justify-between">
-      <RouterLink
-        :to="sectionLink('#top')"
-        class="brand flex items-center"
-        :aria-label="profile.name || copy.site.logoText"
-        @click="activateAnchor('#top')"
-      >
-        <ProfileMark
-          class="brand-mark"
-          mode="image"
-          :text="copy.site.logoText"
-          :image-src="avatar"
-        />
-        <span v-if="profile.name" class="brand-name">{{ profile.name }}</span>
-      </RouterLink>
-      <nav
-        v-if="navigation.length"
-        id="site-navigation"
-        ref="navigationElement"
-        class="site-nav"
-        :class="{ 'site-nav--open': menuOpen }"
-        :aria-label="labels.navigation"
-      >
-        <RouterLink
-          v-for="item in navigation"
-          :key="item.id"
-          :to="sectionLink(item.href)"
-          :class="{ 'nav-current': activeSectionId === item.id }"
-          :aria-current="activeSectionId === item.id ? 'location' : undefined"
-          @click="activateAnchor(item.href)"
-          >{{ item.label }}</RouterLink
-        >
-      </nav>
-      <div class="masthead-actions flex items-center gap-2">
-        <RouterLink
-          v-if="isLocale(alternate)"
-          :to="{ ...sectionLink(route.hash), path: localePaths[alternate] }"
-          class="language-button"
-          :lang="alternate"
-          :hreflang="alternate"
-          @click="menuOpen = false"
-          >{{ languageNames[alternate] }}</RouterLink
-        >
-        <button
-          v-if="navigation.length"
-          ref="menuButton"
-          type="button"
-          class="icon-button menu-button"
-          :aria-expanded="menuOpen"
-          aria-controls="site-navigation"
-          :aria-label="menuOpen ? ui.close : labels.menu"
-          @click="toggleMenu"
-        >
-          <span class="menu-icon" aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-  </header>
+  <SiteHeader
+    ref="siteHeader"
+    :locale="locale"
+    :sections="sections"
+    :avatar="avatar"
+    :active-section-id="activeSectionId"
+    @activate-anchor="activateAnchor"
+  />
 
   <main id="main" ref="mainContent" tabindex="-1">
     <template v-for="section in sections" :key="section.id">
