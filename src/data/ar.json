@@ -374,10 +374,15 @@
       "type": "linkedin"
     },
     "eyebrow": "لنتواصل",
-    "title": "لنبنِ شيئاً مميزاً معاً.",
-    "description": "هل ترغب في التعاون أو مناقشة فرصة في هندسة الأنظمة الخلفية؟ يسعدني التواصل معك.",
+    "availability": "متاح لفرص جديدة",
+    "title": "الأنظمة العظيمة تبدأ بحوار.",
+    "description": "هل لديك مشروع مثير للاهتمام، أو تحدٍ هندسي، أو فرصة تستحق النقاش؟ يسعدني أن أسمع منك.",
     "primaryActionLabel": "راسلني عبر البريد الإلكتروني",
-    "secondaryActionLabel": "تواصل معي على LinkedIn"
+    "secondaryActionLabel": "تواصل معي على LinkedIn",
+    "copyEmailLabel": "نسخ البريد الإلكتروني",
+    "emailCopied": "تم نسخ عنوان البريد الإلكتروني.",
+    "emailCopyFailed": "تعذّر النسخ. يمكنك تحديد العنوان ونسخه.",
+    "opensInNewTab": "(يفتح في تبويب جديد)"
   },
   "footer": {
     "showCurrentYear": true,

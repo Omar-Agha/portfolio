@@ -421,11 +421,16 @@
     "secondaryAction": {
       "type": "linkedin"
     },
-    "eyebrow": "LET'S CONNECT",
-    "title": "Let's Build Something Great.",
-    "description": "Interested in collaborating or discussing a backend engineering opportunity? I'd be happy to connect.",
+    "eyebrow": "LET’S CONNECT",
+    "availability": "Open to new opportunities",
+    "title": "Great Systems Start With a Conversation.",
+    "description": "Have an interesting project, an engineering challenge, or an opportunity worth discussing? I’d love to hear from you.",
     "primaryActionLabel": "Send Me an Email",
-    "secondaryActionLabel": "Connect on LinkedIn"
+    "secondaryActionLabel": "Connect on LinkedIn",
+    "copyEmailLabel": "Copy email",
+    "emailCopied": "Email address copied.",
+    "emailCopyFailed": "Couldn’t copy. You can select and copy the address.",
+    "opensInNewTab": "(opens in a new tab)"
   },
   "footer": {
     "showCurrentYear": true,

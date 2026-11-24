@@ -1336,36 +1336,154 @@
     }
   }
 
-  .contact-panel {
+  .contact-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1.27fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(1.75rem, 4.1vw, 4rem);
+    padding-block: clamp(4rem, 8.5vw, 8rem);
+  }
+  .contact-section--in-view {
+    --contact-animation-state: running;
+  }
+  .contact-copy {
+    min-inline-size: 0;
+  }
+  .contact-copy .section-intro {
+    margin: 0;
+  }
+  .contact-copy h2 {
+    max-inline-size: 13ch;
+    margin-block-start: 1.2rem;
+    font-size: clamp(2.55rem, 5.7vw, 5.2rem);
+    font-weight: 710;
+    line-height: 1.02;
+    letter-spacing: -0.05em;
+    overflow-wrap: anywhere;
+  }
+  .contact-copy h2:lang(ar) {
+    max-inline-size: 12em;
+    font-size: clamp(2.4rem, 5vw, 4.55rem);
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+  .contact-availability {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-block-start: clamp(1.3rem, 2.65vw, 2.1rem);
+    color: var(--accent);
+    font-size: 0.875rem;
+    font-weight: 560;
+  }
+  .contact-availability-dot {
     position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    padding: clamp(1.5rem, 5.1vw, 4.7rem);
-    border: 1px solid var(--accent-line);
-    border-radius: 0.65rem;
-    background: #1b2318;
+    flex: none;
+    inline-size: 0.4rem;
+    block-size: 0.4rem;
+    border-radius: 50%;
+    background: var(--accent);
   }
-  .contact-panel::after {
-    position: absolute;
-    z-index: -1;
-    inset-block: 0;
-    inset-inline-end: 0;
-    width: 45%;
-    content: '';
-    background-image:
-      linear-gradient(90deg, #bbd4aa1d 1px, transparent 1px),
-      linear-gradient(#bbd4aa1d 1px, transparent 1px);
-    background-size: 1.7rem 1.7rem;
-    mask-image: linear-gradient(to left, #000, transparent 90%);
+  .contact-description {
+    max-inline-size: 43ch;
+    margin-block-start: 0.9rem;
+    color: var(--muted);
+    font-size: clamp(1.03rem, 1.5vw, 1.2rem);
+    line-height: 1.65;
   }
-  [dir='rtl'] .contact-panel::after {
-    mask-image: linear-gradient(to right, #000, transparent 90%);
+  .contact-description:lang(ar) {
+    max-inline-size: 29em;
+    line-height: 1.8;
   }
-  .contact-panel .section-intro {
-    margin-block-end: 1.5rem;
+  .contact-actions {
+    margin-block-start: 1.65rem;
   }
-  .contact-panel h2 {
-    text-wrap: initial;
+  .contact-actions a,
+  .contact-copy-button {
+    gap: 0.5rem;
+  }
+  .contact-actions svg,
+  .contact-copy-button svg {
+    flex: none;
+    inline-size: 1.05rem;
+    block-size: 1.05rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .contact-actions .contact-action-arrow {
+    inline-size: 0.86rem;
+    block-size: 0.86rem;
+    color: var(--subtle);
+  }
+  .contact-address {
+    margin-block-start: 1.25rem;
+  }
+  .contact-address-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.1rem 0.85rem;
+  }
+  .contact-email {
+    color: var(--text);
+    font: 0.9rem/1.5 var(--font-mono, monospace);
+    overflow-wrap: anywhere;
+  }
+  .contact-copy-button {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 2.75rem;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    transition: color 0.2s ease;
+  }
+  .contact-copy-button:is(:hover, :focus-visible) {
+    color: var(--accent);
+  }
+  .contact-copy-feedback {
+    min-block-size: 1.55em;
+    color: var(--subtle);
+    font-size: 0.8125rem;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .contact-availability-dot::after {
+      position: absolute;
+      inset: -0.2rem;
+      border-radius: inherit;
+      background: var(--accent);
+      opacity: 0.13;
+      content: '';
+      animation: contact-availability-pulse 4.8s ease-in-out infinite;
+      animation-play-state: var(--contact-animation-state, paused);
+    }
+  }
+  @keyframes contact-availability-pulse {
+    0%,
+    100% {
+      scale: 0.75;
+      opacity: 0.13;
+    }
+    55% {
+      scale: 1.35;
+      opacity: 0.04;
+    }
+  }
+  @media (max-width: 50rem) {
+    .contact-section {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.15rem;
+      padding-block: clamp(3.5rem, 8vw, 5rem) 2.5rem;
+    }
+    .contact-copy h2 {
+      max-inline-size: 14ch;
+      font-size: clamp(2.55rem, 9.6vw, 4rem);
+    }
+    .contact-copy h2:lang(ar) {
+      font-size: clamp(2.35rem, 8.8vw, 3.7rem);
+    }
   }
 
   .site-footer {

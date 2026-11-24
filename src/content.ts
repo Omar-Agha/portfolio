@@ -8,10 +8,15 @@ type Action = { type: string; target?: string }
 type Introduction = { eyebrow?: string; title: string; description?: string }
 
 export type ContactContent = Introduction & {
+  availability?: string
   primaryAction?: Action
   secondaryAction?: Action
   primaryActionLabel?: string
   secondaryActionLabel?: string
+  copyEmailLabel?: string
+  emailCopied?: string
+  emailCopyFailed?: string
+  opensInNewTab?: string
 }
 
 export type AboutContent = {
