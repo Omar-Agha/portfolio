@@ -10,7 +10,11 @@ defineProps<{
 </script>
 
 <template>
-  <section id="skills" class="shell portfolio-section section-split relative isolate" tabindex="-1">
+  <section
+    id="skills"
+    class="shell portfolio-section section-split skills-section relative isolate"
+    tabindex="-1"
+  >
     <AmbientBackground />
     <SectionIntro
       class="relative z-10"

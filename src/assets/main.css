@@ -984,15 +984,21 @@
   .section-split .section-intro {
     margin: 0;
   }
+  @media (width > 53rem) {
+    .skills-section {
+      grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr);
+      gap: clamp(2rem, 4vw, 4rem);
+    }
+  }
   .skill-list {
     border-block-start: 1px solid var(--line);
   }
   .skill-row {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-columns: clamp(10rem, 24%, 12rem) minmax(0, 1fr);
     align-items: start;
     gap: 0.6rem 1.4rem;
-    padding-block: 1.1rem;
+    padding-block: 0.9rem;
     border-block-end: 1px solid var(--line);
   }
   .skill-row h3 {
@@ -1000,6 +1006,7 @@
     font-size: 1rem;
     color: var(--text);
     font-weight: 650;
+    overflow-wrap: anywhere;
   }
 
   .experience-list {
