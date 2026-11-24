@@ -7,6 +7,13 @@ type Action = { type: string; target?: string }
 
 type Introduction = { eyebrow?: string; title: string; description?: string }
 
+export type AboutContent = {
+  eyebrow?: string
+  title: string
+  introduction?: string
+  sections?: { id: string; number?: string | number; title?: string; description?: string }[]
+}
+
 type ProjectBase = {
   id: string
   visible?: boolean
@@ -86,7 +93,7 @@ type PortfolioContent = {
       technologies?: string[]
     }[]
   }
-  about: Introduction & { paragraphs?: string[] }
+  about: AboutContent
   contact: Introduction & {
     primaryAction?: Action
     secondaryAction?: Action

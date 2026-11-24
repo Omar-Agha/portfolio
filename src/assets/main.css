@@ -1117,66 +1117,223 @@
 
   .about-section {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.7fr);
-    align-items: center;
-    gap: clamp(2rem, 10vw, 10rem);
+    align-items: start;
+    gap: clamp(1.8rem, 3.8vw, 3.35rem) clamp(2rem, 4vw, 3.75rem);
+    padding-block-end: clamp(1.125rem, 2vw, 2rem);
   }
-  .about-copy .section-intro {
-    margin-block-end: 1.35rem;
+  .about-section--with-portrait {
+    grid-template-columns: minmax(0, 1.24fr) minmax(0, 1fr);
   }
-  .about-copy > p {
-    max-inline-size: 40rem;
+  .about-section--with-portrait .about-lead {
+    align-self: center;
+    @media (min-width: 65rem) {
+      margin-block-end: 1.5rem;
+    }
+  }
+  .about-lead .section-intro {
+    margin: 0;
+  }
+  .about-lead .section-intro h2 {
+    max-inline-size: 16ch;
+    margin-block-start: 1.2rem;
+    font-size: clamp(2.65rem, 5.25vw, 4.9rem);
+    font-weight: 710;
+    line-height: 1.01;
+    letter-spacing: -0.048em;
+    overflow-wrap: anywhere;
+  }
+  .about-lead .section-intro h2:lang(ar) {
+    max-inline-size: 14em;
+    font-size: clamp(2.55rem, 4.65vw, 4.35rem);
+    line-height: 1.24;
+    letter-spacing: 0;
+  }
+  .about-introduction {
+    max-inline-size: 42ch;
+    margin-block-start: clamp(1.15rem, 2.15vw, 1.9rem);
+    padding-inline-start: clamp(0.9rem, 2vw, 1.45rem);
+    border-inline-start: 2px solid var(--accent-line);
+    color: var(--text);
+    font-size: clamp(1.18rem, 1.9vw, 1.55rem);
+    line-height: 1.55;
+  }
+  .about-introduction:lang(ar) {
+    max-inline-size: 30em;
+    line-height: 1.75;
+  }
+  .about-portrait {
+    --portrait-border-width: 1px;
+    --portrait-radius: 0.8rem;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    justify-self: start;
+    inline-size: min(100%, 27.5rem, var(--portrait-native-width, 27.5rem));
+    padding: 0.45rem;
+    border: var(--portrait-border-width) solid var(--line-strong);
+    border-radius: var(--portrait-radius);
+    background: var(--surface);
+  }
+  .about-portrait-window {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 0.45rem;
+    background: var(--background);
+  }
+  .about-portrait img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: 50% 28%;
+    scale: 1.25;
+    transform-origin: 50% 38%;
+  }
+  .about-portrait-orbit {
+    display: none;
+  }
+  @property --portrait-lap {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (offset-path: inset(0 round 1px)) {
+      .about-portrait-orbit {
+        --portrait-track-radius: calc(var(--portrait-radius) - var(--portrait-border-width) / 2);
+        position: absolute;
+        z-index: 1;
+        inset: calc(var(--portrait-border-width) / -2);
+        display: block;
+        pointer-events: none;
+        opacity: 0;
+        animation: about-portrait-lap 10s linear infinite;
+      }
+      .about-portrait-trail {
+        position: absolute;
+        inset: 0;
+        inline-size: 100%;
+        block-size: 100%;
+        overflow: visible;
+      }
+      .about-portrait-trail rect {
+        rx: var(--portrait-track-radius);
+        ry: var(--portrait-track-radius);
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 1.75px;
+        stroke-linecap: round;
+        stroke-opacity: 0.032;
+        /* Overlapping dashes share an endpoint and soften toward the tail. */
+        stroke-dasharray: var(--trail-length) calc(100 - var(--trail-length));
+        stroke-dashoffset: calc(var(--trail-length) - var(--portrait-lap));
+      }
+      .about-portrait-dot {
+        position: absolute;
+        inset: 0 auto auto 0;
+        inline-size: 5.5px;
+        block-size: 5.5px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 6px 1px color-mix(in srgb, var(--accent) 45%, transparent);
+        offset-path: inset(0 round var(--portrait-track-radius));
+        offset-distance: inherit;
+        offset-anchor: center;
+        offset-rotate: 0deg;
+      }
+    }
+  }
+  @keyframes about-portrait-lap {
+    0% {
+      --portrait-lap: 0;
+      offset-distance: 0%;
+      opacity: 0;
+    }
+    8% {
+      --portrait-lap: 8;
+      offset-distance: 8%;
+      opacity: 1;
+    }
+    88% {
+      --portrait-lap: 88;
+      offset-distance: 88%;
+      opacity: 1;
+    }
+    100% {
+      --portrait-lap: 100;
+      offset-distance: 100%;
+      opacity: 0;
+    }
+  }
+  .about-entries {
+    max-inline-size: 46rem;
+  }
+  .about-section--with-portrait .about-entries {
+    grid-column: 1 / -1;
+    max-inline-size: none;
+  }
+  .about-entry {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(0.65rem, 1.65vw, 1.35rem);
+    padding-block: clamp(1.1rem, 2vw, 1.5rem);
+    border-block-start: 1px solid var(--line);
+  }
+  .about-number {
+    min-inline-size: 2rem;
+    flex: none;
+    color: color-mix(in srgb, var(--accent) 76%, var(--muted));
+    font: 600 0.875rem/1.5 var(--font-meta);
+    font-variant-numeric: tabular-nums;
+  }
+  .about-entry > div {
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+  }
+  .about-entry h3 {
+    color: var(--text);
+    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+    font-weight: 650;
+    line-height: 1.35;
+    letter-spacing: -0.025em;
+  }
+  .about-entry h3:lang(ar) {
+    letter-spacing: 0;
+  }
+  .about-entry p {
+    max-inline-size: 63ch;
     color: var(--muted);
-    font-size: 1.0625rem;
+    font-size: 1rem;
     line-height: 1.7;
   }
-  .about-copy > p + p {
-    margin-block-start: 0.9rem;
+  .about-entry h3 + p {
+    margin-block-start: 0.45rem;
   }
-  .identity-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding: clamp(1.4rem, 3vw, 2.2rem);
-    border: 1px solid var(--line);
-    border-radius: 0.55rem;
-    background-color: var(--surface);
-    background-image:
-      linear-gradient(90deg, #b0c9a108 1px, transparent 1px),
-      linear-gradient(#b0c9a108 1px, transparent 1px);
-    background-size: 1.4rem 1.4rem;
+  .about-entry p:lang(ar) {
+    max-inline-size: 32em;
+    line-height: 1.82;
   }
-
-  .identity-mark {
-    display: grid;
-    place-items: center;
-    width: 5.2rem;
-    height: 5.2rem;
-    border: 1px solid var(--accent-line);
-    border-radius: 0.48rem;
-    color: var(--accent);
-    background: #232f1e;
-    font: 600 1.8rem/1 var(--font-meta);
-    letter-spacing: -0.075em;
+  @media (hover: hover) and (pointer: fine) {
+    .about-entry :is(.about-number, h3) {
+      transition: color 0.2s ease;
+    }
+    .about-entry:hover :is(.about-number, h3) {
+      color: var(--accent);
+    }
   }
-  img.identity-mark {
-    border-radius: 50%;
-  }
-  .identity-name {
-    margin-block-start: 1rem;
-    color: var(--text);
-    font-size: 1.3rem;
-    font-weight: 650;
-  }
-  .identity-headline {
-    color: var(--muted);
-    font-size: 0.95rem;
-  }
-  .identity-location {
-    color: var(--subtle);
-    font-size: 0.875rem;
-    margin-block-start: 0.7rem;
+  @media (width > 47rem) {
+    .about-section--with-portrait .about-entry > div {
+      display: grid;
+      grid-template-columns: minmax(0, 0.36fr) minmax(0, 1fr);
+      align-items: baseline;
+      gap: clamp(1.25rem, 3vw, 2.75rem);
+      flex: 1;
+    }
+    .about-section--with-portrait .about-entry h3 + p {
+      margin-block-start: 0;
+    }
+    .about-section--with-portrait .about-entry p:only-child {
+      grid-column: 1 / -1;
+    }
   }
 
   .contact-panel {
@@ -1393,13 +1550,9 @@
   }
 
   @media (max-width: 53rem) {
-    .section-split,
-    .about-section {
+    .section-split {
       grid-template-columns: 1fr;
       gap: 1.7rem;
-    }
-    .identity-card {
-      width: min(100%, 29rem);
     }
     .work-list,
     .lab-grid {
@@ -1407,6 +1560,20 @@
     }
     .hero {
       gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 47rem) {
+    .about-section--with-portrait {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .about-portrait {
+      grid-column: auto;
+      grid-row: auto;
+      inline-size: min(100%, 22rem, var(--portrait-native-width, 22rem));
+    }
+    .about-portrait-window {
+      aspect-ratio: 5 / 4;
     }
   }
 

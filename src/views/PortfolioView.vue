@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { computed, nextTick, ref, useTemplateRef, watch, watchEffect } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import AboutSection from '../components/AboutSection.vue'
 import EngineeringLab from '../components/EngineeringLab.vue'
 import FeaturedWork from '../components/FeaturedWork.vue'
 import ProfileMark from '../components/ProfileMark.vue'
@@ -63,7 +64,6 @@ const skills = computed(() =>
   presentItems(copy.value.skills.categories).filter((category) => nonblank(category.items).length),
 )
 const experience = computed(() => presentItems(copy.value.experience.items))
-const about = computed(() => nonblank(copy.value.about.paragraphs))
 const sections = computed(() => {
   const available: Record<string, boolean> = {
     hero: Boolean(hero.value.title),
@@ -71,7 +71,7 @@ const sections = computed(() => {
     lab: lab.value.length > 0,
     skills: skills.value.length > 0,
     experience: experience.value.length > 0,
-    about: about.value.length > 0,
+    about: Boolean(copy.value.about.title.trim()),
     contact: Boolean(copy.value.contact.title),
   }
   return copy.value.site.sections.filter((section) => section.visible && available[section.id])
@@ -382,12 +382,6 @@ const contactActions = computed(() =>
   }),
 )
 
-const headline = computed(() =>
-  profile.value.headline
-    ?.split('|')
-    .map((part) => part.trim())
-    .filter(Boolean),
-)
 const avatar = computed(() => assetUrl(profile.value.avatar))
 const year = computed(() =>
   new Intl.DateTimeFormat(locale.value, { year: 'numeric' }).format(new Date()),
@@ -702,36 +696,12 @@ watchEffect(() => {
         </div>
       </section>
 
-      <section
+      <AboutSection
         v-else-if="section.id === 'about'"
-        id="about"
-        class="shell portfolio-section about-section"
-        tabindex="-1"
-      >
-        <div class="about-copy">
-          <SectionIntro
-            :eyebrow="copy.about.eyebrow"
-            :title="copy.about.title"
-            :description="copy.about.description"
-          />
-          <p v-for="paragraph in about" :key="paragraph">{{ paragraph }}</p>
-        </div>
-        <div class="identity-card">
-          <ProfileMark
-            class="identity-mark"
-            mode="image"
-            :text="copy.site.logoText"
-            :image-src="avatar"
-            loading="lazy"
-            aria-hidden="true"
-          />
-          <p class="identity-name">{{ profile.name }}</p>
-          <p v-for="line in headline" :key="line" class="identity-headline">{{ line }}</p>
-          <p v-if="profile.location" class="location identity-location">
-            <i aria-hidden="true"></i>{{ profile.location }}
-          </p>
-        </div>
-      </section>
+        :about="copy.about"
+        :portrait="avatar"
+        :portrait-alt="profile.name"
+      />
 
       <section
         v-else-if="section.id === 'contact'"
