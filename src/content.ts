@@ -111,11 +111,10 @@ type PortfolioContent = {
     showCurrentYear?: boolean
     showSocialLinks?: boolean
     showBackToTop?: boolean
-    creditsVisible?: boolean
     tagline?: string
     copyrightName?: string
-    creditsText?: string
     backToTopLabel?: string
+    socialLabels: Record<'github' | 'linkedin' | 'email', string>
   }
 }
 

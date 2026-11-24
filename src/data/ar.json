@@ -388,10 +388,13 @@
     "showCurrentYear": true,
     "showSocialLinks": true,
     "showBackToTop": true,
-    "creditsVisible": true,
     "tagline": "هندسة أنظمة موثوقة.",
     "copyrightName": "Omar Agha",
-    "creditsText": "بُني باستخدام Vue.js · مستضاف على GitHub Pages",
-    "backToTopLabel": "العودة إلى الأعلى"
+    "backToTopLabel": "العودة إلى الأعلى",
+    "socialLabels": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "البريد الإلكتروني"
+    }
   }
 }

@@ -46,7 +46,6 @@ const labels = computed(() =>
         project: 'استعرض المشروع',
         viewOnGitHub: 'عرض على GitHub',
         newTab: '(يفتح في تبويب جديد)',
-        email: 'البريد الإلكتروني',
       }
     : {
         menu: 'Menu',
@@ -55,7 +54,6 @@ const labels = computed(() =>
         project: 'Explore Project',
         viewOnGitHub: 'View on GitHub',
         newTab: '(opens in a new tab)',
-        email: 'Email',
       },
 )
 
@@ -349,11 +347,11 @@ const socials = computed(() => ({
   email: emailUrl(profile.value.socials.email),
 }))
 const socialLinks = computed(() =>
-  [
-    { label: 'GitHub', href: socials.value.github },
-    { label: 'LinkedIn', href: socials.value.linkedin },
-    { label: labels.value.email, href: socials.value.email },
-  ].filter((link) => link.href),
+  (['github', 'linkedin', 'email'] as const).flatMap((id) => {
+    const href = socials.value[id]
+    const label = copy.value.footer.socialLabels[id]
+    return href && label ? [{ id, label, href }] : []
+  }),
 )
 
 const heroActions = computed(() =>
@@ -372,9 +370,13 @@ const heroActions = computed(() =>
 )
 
 const avatar = computed(() => assetUrl(profile.value.avatar))
-const year = computed(() =>
-  new Intl.DateTimeFormat(locale.value, { year: 'numeric' }).format(new Date()),
-)
+const copyright = computed(() => {
+  const { showCurrentYear, copyrightName } = copy.value.footer
+  const year = showCurrentYear
+    ? new Intl.DateTimeFormat(locale.value, { year: 'numeric' }).format(new Date())
+    : ''
+  return [year, copyrightName?.trim()].filter(Boolean).join(' ')
+})
 
 function formatMonth(value: string) {
   if (!/^\d{4}-\d{2}$/.test(value)) return value
@@ -710,30 +712,47 @@ watchEffect(() => {
             :text="copy.site.logoText"
             :image-src="avatar"
           />
-          <p v-if="copy.footer.tagline">{{ copy.footer.tagline }}</p>
+          <div>
+            <p v-if="profile.name" class="brand-name">{{ profile.name }}</p>
+            <p v-if="copy.footer.tagline" class="footer-tagline">{{ copy.footer.tagline }}</p>
+          </div>
         </div>
-        <p v-if="copy.footer.copyrightName || copy.footer.showCurrentYear" class="copyright">
-          © <bdi v-if="copy.footer.showCurrentYear">{{ year }}</bdi>
-          <bdi v-if="copy.footer.copyrightName">{{ copy.footer.copyrightName }}</bdi>
+        <p v-if="copyright" class="copyright">
+          <bdi dir="ltr">© {{ copyright }}</bdi>
         </p>
       </div>
       <div class="footer-end">
-        <div class="footer-links flex flex-wrap gap-x-5 gap-y-1">
-          <template v-if="copy.footer.showSocialLinks">
-            <a v-for="link in socialLinks" :key="link.label" :href="link.href"
-              ><bdi>{{ link.label }}</bdi></a
-            >
-          </template>
-          <RouterLink
-            v-if="copy.footer.showBackToTop && copy.footer.backToTopLabel"
-            :to="sectionLink('#top')"
-            @click="activateAnchor('#top')"
-            >{{ copy.footer.backToTopLabel }}</RouterLink
-          >
+        <div
+          v-if="copy.footer.showSocialLinks && socialLinks.length"
+          class="footer-links flex flex-wrap gap-x-5 gap-y-1"
+        >
+          <a v-for="link in socialLinks" :key="link.id" :href="link.href">
+            <svg v-if="link.id === 'github'" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="6" cy="6" r="2.5" />
+              <circle cx="6" cy="18" r="2.5" />
+              <circle cx="18" cy="6" r="2.5" />
+              <path d="M6 8.5v7m0 0c0-6 12-2 12-7" />
+            </svg>
+            <svg v-else-if="link.id === 'linkedin'" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M8 11v5m0-8v.1M12 16v-5m0 2a2 2 0 0 1 4 0v3" />
+            </svg>
+            <svg v-else viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m4 7 8 6 8-6" />
+            </svg>
+            <bdi>{{ link.label }}</bdi>
+          </a>
         </div>
-        <p v-if="copy.footer.creditsVisible && copy.footer.creditsText" class="credits">
-          {{ copy.footer.creditsText }}
-        </p>
+        <RouterLink
+          v-if="copy.footer.showBackToTop && copy.footer.backToTopLabel"
+          class="footer-top"
+          :to="sectionLink('#top')"
+          @click="activateAnchor('#top')"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-5 5 5-5 5 5" /></svg>
+          <span>{{ copy.footer.backToTopLabel }}</span>
+        </RouterLink>
       </div>
     </div>
   </footer>

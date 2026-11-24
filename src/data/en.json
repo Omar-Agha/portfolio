@@ -436,10 +436,13 @@
     "showCurrentYear": true,
     "showSocialLinks": true,
     "showBackToTop": true,
-    "creditsVisible": true,
     "tagline": "Engineering reliable systems.",
     "copyrightName": "Omar Agha",
-    "creditsText": "Built with Vue.js · Hosted on GitHub Pages",
-    "backToTopLabel": "Back to top"
+    "backToTopLabel": "Back to top",
+    "socialLabels": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Email"
+    }
   }
 }
