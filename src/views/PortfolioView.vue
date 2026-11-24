@@ -12,6 +12,7 @@ import ProfileMark from '../components/ProfileMark.vue'
 import ProjectDrawer, { type ProjectDetail } from '../components/ProjectDrawer.vue'
 import SectionIntro from '../components/SectionIntro.vue'
 import SiteHeader from '../components/SiteHeader.vue'
+import SkillsSection from '../components/SkillsSection.vue'
 import TechnologyTags from '../components/TechnologyTags.vue'
 import AmbientBackground from '../components/ui/AmbientBackground.vue'
 import {
@@ -378,26 +379,11 @@ watchEffect(() => {
         @open="(event, id) => openProject(event, 'lab', id)"
       />
 
-      <section
+      <SkillsSection
         v-else-if="section.id === 'skills'"
-        id="skills"
-        class="shell portfolio-section section-split relative isolate"
-        tabindex="-1"
-      >
-        <AmbientBackground />
-        <SectionIntro
-          class="relative z-10"
-          :eyebrow="copy.skills.eyebrow"
-          :title="copy.skills.title"
-          :description="copy.skills.description"
-        />
-        <div class="skill-list relative z-10">
-          <div v-for="category in skills" :key="category.id" class="skill-row">
-            <h3>{{ category.title }}</h3>
-            <TechnologyTags :items="category.items" />
-          </div>
-        </div>
-      </section>
+        :intro="copy.skills"
+        :categories="skills"
+      />
 
       <section
         v-else-if="section.id === 'experience'"
