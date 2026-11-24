@@ -392,9 +392,26 @@
   "about": {
     "eyebrow": "ABOUT ME",
     "title": "Engineering Beyond the Code",
-    "paragraphs": [
-      "I'm a software engineer with experience building backend applications and enterprise systems, with a focus on reliable architecture and maintainable business logic.",
-      "Outside professional work, I enjoy exploring technologies, experimenting with architectures, and building personal projects to deepen my engineering knowledge."
+    "introduction": "For me, software engineering is more than writing code. It's about understanding complex problems, making thoughtful decisions, and building systems that remain reliable as they grow.",
+    "sections": [
+      {
+        "id": "thinking",
+        "number": "01",
+        "title": "How I Think",
+        "description": "I enjoy breaking down complex problems, understanding how systems behave under pressure, and finding practical solutions. I'm particularly interested in the challenges of concurrency, distributed systems, and data consistency."
+      },
+      {
+        "id": "motivation",
+        "number": "02",
+        "title": "What Drives Me",
+        "description": "Curiosity keeps me learning. I like exploring new technologies, questioning architectural decisions, and turning ideas into working projects. Every experiment is an opportunity to become a better engineer."
+      },
+      {
+        "id": "ambition",
+        "number": "03",
+        "title": "Beyond Engineering",
+        "description": "My long-term ambition is to build software products of my own. I'm interested in turning real problems into useful products, combining technical engineering with product thinking and entrepreneurship."
+      }
     ]
   },
   "contact": {
