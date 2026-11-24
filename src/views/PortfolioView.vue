@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { computed, nextTick, ref, useTemplateRef, watch, watchEffect } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import AboutSection from '../components/AboutSection.vue'
+import ContactSection from '../components/ContactSection.vue'
 import EngineeringLab from '../components/EngineeringLab.vue'
 import FeaturedWork from '../components/FeaturedWork.vue'
 import ProfileMark from '../components/ProfileMark.vue'
@@ -370,18 +371,6 @@ const heroActions = computed(() =>
   }),
 )
 
-const contactActions = computed(() =>
-  [
-    { action: copy.value.contact.primaryAction, label: copy.value.contact.primaryActionLabel },
-    { action: copy.value.contact.secondaryAction, label: copy.value.contact.secondaryActionLabel },
-  ].flatMap(({ action, label }) => {
-    const type = action?.type
-    if (type !== 'email' && type !== 'linkedin' && type !== 'github') return []
-    const href = socials.value[type]
-    return label && href ? [{ label, href }] : []
-  }),
-)
-
 const avatar = computed(() => assetUrl(profile.value.avatar))
 const year = computed(() =>
   new Intl.DateTimeFormat(locale.value, { year: 'numeric' }).format(new Date()),
@@ -703,31 +692,11 @@ watchEffect(() => {
         :portrait-alt="profile.name"
       />
 
-      <section
+      <ContactSection
         v-else-if="section.id === 'contact'"
-        id="contact"
-        class="shell portfolio-section contact-section"
-        tabindex="-1"
-      >
-        <div class="contact-panel">
-          <SectionIntro
-            :eyebrow="copy.contact.eyebrow"
-            :title="copy.contact.title"
-            :description="copy.contact.description"
-          />
-          
-          <div v-if="contactActions.length" class="contact-actions flex flex-wrap gap-3">
-            <a
-              v-for="(action, index) in contactActions"
-              :key="action.href"
-              :href="action.href"
-              class="button"
-              :class="index ? 'button--outline' : 'button--primary'"
-              >{{ action.label }}</a
-            >
-          </div>
-        </div>
-      </section>
+        :contact="copy.contact"
+        :links="socials"
+      />
     </template>
   </main>
 

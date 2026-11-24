@@ -7,6 +7,13 @@ type Action = { type: string; target?: string }
 
 type Introduction = { eyebrow?: string; title: string; description?: string }
 
+export type ContactContent = Introduction & {
+  primaryAction?: Action
+  secondaryAction?: Action
+  primaryActionLabel?: string
+  secondaryActionLabel?: string
+}
+
 export type AboutContent = {
   eyebrow?: string
   title: string
@@ -94,12 +101,7 @@ type PortfolioContent = {
     }[]
   }
   about: AboutContent
-  contact: Introduction & {
-    primaryAction?: Action
-    secondaryAction?: Action
-    primaryActionLabel?: string
-    secondaryActionLabel?: string
-  }
+  contact: ContactContent
   footer: {
     showCurrentYear?: boolean
     showSocialLinks?: boolean
