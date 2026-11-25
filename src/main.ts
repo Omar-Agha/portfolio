@@ -17,6 +17,13 @@ const base = new URL(
   document.baseURI,
 )
 
+// Resolve each relative icon URL before locale navigation changes the document URL.
+for (const icon of document.head.querySelectorAll<HTMLLinkElement>(
+  'link[rel="icon"], link[rel="apple-touch-icon"]',
+)) {
+  icon.setAttribute('href', icon.href)
+}
+
 const { app, router, prerendered } = createPortfolioApp(createWebHistory(base.pathname), base, page)
 
 if (page) {
