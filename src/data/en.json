@@ -345,20 +345,41 @@
         "cover": "/images/lab/microservices.webp",
         "technologies": [
           ".NET",
-          "Docker",
+          "ABP Framework",
+          "YARP",
+          "OpenIddict",
           "RabbitMQ",
-          "Redis"
+          "Redis",
+          "Docker",
+          "Elasticsearch"
         ],
-        "repositoryUrl": "",
+        "repositoryUrl": "https://github.com/Omar-Agha/microservice-templates",
         "demoUrl": "",
-        "title": "Microservices Template",
-        "summary": "A personal template for experimenting with distributed backend architecture.",
-        "description": "An evolving playground for evaluating reusable service patterns and infrastructure choices.",
+        "title": ".NET Microservice Templates",
+        "summary": "Reusable .NET CLI templates for bootstrapping distributed applications with preconfigured identity, API gateway, messaging, and infrastructure foundations.",
+        "description": "A developer tooling project designed to simplify the creation of distributed applications using the open-source ABP Framework. Motivated by the need for an accessible alternative to commercial microservice scaffolding, the project provides reusable .NET CLI templates that eliminate repetitive infrastructure configuration while retaining ABP's enterprise development capabilities.",
         "architecture": [
-          "Microservices"
+          "Microservices Architecture",
+          "Domain-Driven Design",
+          "Event-Driven Architecture",
+          "Centralized Identity Management",
+          "API Gateway Pattern"
         ],
-        "implemented": [],
-        "planned": []
+        "implemented": [
+          "Reusable .NET CLI templates for authentication servers, API gateways, and independent microservices.",
+          "Centralized authentication and service-to-service authorization using OpenIddict.",
+          "API gateway routing and API documentation aggregation using YARP.",
+          "Asynchronous communication using RabbitMQ with ABP's Inbox/Outbox support.",
+          "Distributed caching using Redis.",
+          "Application logging and Elasticsearch integration.",
+          "Docker-based service containerization.",
+          "End-to-end validation of a distributed application generated using the templates."
+        ],
+        "planned": [
+          "Introduce gRPC-based inter-service communication.",
+          "Improve template generation and configuration automation.",
+          "Introduce automated build and integration validation."
+        ]
       },
       {
         "id": "7ake",
@@ -367,25 +388,39 @@
         "cover": "",
         "technologies": [
           "Laravel",
-          "Filament"
+          "PHP",
+          "Filament",
+          "MySQL",
+          "Pest",
+          "REST APIs"
         ],
-        "repositoryUrl": "",
+        "repositoryUrl": "https://github.com/Omar-Agha/7ake-app",
         "demoUrl": "",
-        "title": "7ake E-Commerce",
-        "summary": "An e-commerce backend built with Laravel and Filament.",
-        "description": "An ongoing commerce platform exploring product catalogs, inventory, order lifecycles, and payment workflows.",
+        "title": "7ake — E-Commerce Platform",
+        "summary": "An independently developed e-commerce platform focused on domain modeling, inventory consistency, order lifecycle management, and payment architecture.",
+        "description": "7ake is a personal commercial product under active development for an Arabic apparel brand. Built as an API-first modular monolith, the platform separates core commerce domains while maintaining transactional consistency and manageable infrastructure complexity. The project combines backend engineering, architectural decision-making, and product development.",
         "architecture": [
-          "Modular Backend",
-          "Domain Services"
+          "Modular Monolith",
+          "API-First Architecture",
+          "Domain Services",
+          "Explicit State Transitions",
+          "Transactional Consistency"
         ],
         "implemented": [
-          "Product catalog administration",
-          "Inventory management",
-          "Checkout and order lifecycle foundations"
+          "Product catalog management with collections, categories, and product variants.",
+          "Variant-level inventory management with concurrency-aware stock reservations.",
+          "Transactional order creation and inventory reservation.",
+          "Order lifecycle management with explicit state transitions.",
+          "Historical pricing and shipping address snapshots.",
+          "Payment lifecycle foundations with provider abstraction.",
+          "Administrative dashboards and operational workflows using Filament.",
+          "Automated tests covering core business operations."
         ],
         "planned": [
-          "Complete payment and settlement integrations",
-          "Finalize end-to-end purchase flows"
+          "Complete payment provider integrations and settlement workflows.",
+          "Finalize customer-facing APIs and end-to-end purchase flows.",
+          "Expand automated test coverage and validate complete business workflows.",
+          "Develop customer-facing storefront and mobile applications."
         ]
       },
       {
@@ -395,16 +430,42 @@
         "cover": "/images/lab/spring.webp",
         "technologies": [
           "Java",
-          "Spring Boot"
+          "Spring Boot",
+          "Spring Data JPA",
+          "Hibernate",
+          "Flyway",
+          "MapStruct",
+          "JUnit",
+          "OpenAPI"
         ],
-        "repositoryUrl": "",
+        "repositoryUrl": "https://github.com/Omar-Agha/java-remittance-platform",
         "demoUrl": "",
-        "title": "Spring Boot Lab",
-        "summary": "A Java and Spring Boot learning and architecture playground.",
-        "description": "A space to explore Spring Boot development practices and compare backend approaches.",
-        "architecture": [],
-        "implemented": [],
-        "planned": []
+        "title": "Spring Boot Remittance Lab",
+        "summary": "A Spring Boot engineering experiment exploring modular backend architecture, financial domain modeling, and configurable pricing through standardized REST APIs.",
+        "description": "A personal engineering initiative exploring the Java and Spring Boot ecosystem through the implementation of a modular financial application. The project applies established backend engineering principles to remittance-related business domains, with particular emphasis on financial calculations, domain abstractions, API consistency, and persistence strategies.",
+        "architecture": [
+          "Modular Monolith",
+          "Layered Architecture",
+          "Domain Modeling",
+          "Repository Pattern",
+          "Service Layer"
+        ],
+        "implemented": [
+          "Business-oriented modules for customers, currencies, taxes, fee rules, fee calculation, and remittance issuance.",
+          "Configurable financial fee rules with thresholds, approval states, and effective dates.",
+          "Financial calculations using BigDecimal for decimal precision.",
+          "Standardized REST API contracts using Java records and MapStruct.",
+          "Centralized exception handling and structured error responses.",
+          "Relational persistence using Spring Data JPA and Hibernate.",
+          "Database schema versioning using Flyway migrations.",
+          "Unit and integration tests for selected business operations.",
+          "Interactive API documentation using OpenAPI and Swagger."
+        ],
+        "planned": [
+          "Extend remittance processing and lifecycle management.",
+          "Strengthen transaction boundaries and validation consistency.",
+          "Expand financial calculation and integration test coverage."
+        ]
       }
     ]
   },

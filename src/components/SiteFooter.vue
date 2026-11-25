@@ -59,7 +59,7 @@ const copyright = computed(() => {
           v-if="footer.showSocialLinks && socialLinks.length"
           class="footer-links flex flex-wrap gap-x-5 gap-y-1"
         >
-          <a v-for="link in socialLinks" :key="link.id" :href="link.href">
+          <a v-for="link in socialLinks" :key="link.id" :href="link.href" target="_blank">
             <svg v-if="link.id === 'github'" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="6" cy="6" r="2.5" />
               <circle cx="6" cy="18" r="2.5" />
