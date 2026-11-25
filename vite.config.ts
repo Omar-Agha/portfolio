@@ -9,6 +9,7 @@ import { prerenderPortfolio } from './build/prerender.ts'
 import ar from './src/data/ar.json' with { type: 'json' }
 import en from './src/data/en.json' with { type: 'json' }
 import { canonicalUrls, pageMetadata, productionSiteUrl } from './src/seo.ts'
+import { portfolioJsonLd, portfolioJsonLdId } from './src/structuredData.ts'
 
 const publicDir = fileURLToPath(new URL('./public', import.meta.url))
 const publicFiles = readdirSync(publicDir, { recursive: true, withFileTypes: true })
@@ -33,7 +34,8 @@ export default defineConfig({
       name: 'portfolio-metadata',
       transformIndexHtml: (_html, { filename }) => {
         const locale = filename === arabicEntry ? 'ar' : 'en'
-        const metadata = pageMetadata(locale, (locale === 'ar' ? ar : en).site.seo)
+        const copy = locale === 'ar' ? ar : en
+        const metadata = pageMetadata(locale, copy.site.seo)
         return [
           {
             tag: 'title',
@@ -60,6 +62,14 @@ export default defineConfig({
             attrs: { property, content },
             injectTo: 'head' as const,
           })),
+          {
+            tag: 'script',
+            attrs: { id: portfolioJsonLdId, type: 'application/ld+json' },
+            children: portfolioJsonLd(locale, copy, en.profile.name, (path) =>
+              publicFiles.includes(path),
+            ),
+            injectTo: 'head',
+          },
         ]
       },
       generateBundle() {

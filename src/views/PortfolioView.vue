@@ -18,10 +18,12 @@ import {
   isLocale,
   nonblank,
   presentItems,
+  publicAssetPath,
   webUrl,
 } from '../content'
 import { useRenderContext } from '../renderContext'
 import { pageMetadata } from '../seo'
+import { portfolioJsonLd, portfolioJsonLdId } from '../structuredData'
 
 const route = useRoute()
 const { assetUrl } = useRenderContext()
@@ -228,6 +230,16 @@ onMounted(() => {
     for (const [name, value] of Object.entries(metadata.named)) setMeta('name', name, value)
     for (const [property, value] of Object.entries(metadata.openGraph)) {
       setMeta('property', property, value)
+    }
+    const schema = document.getElementById(portfolioJsonLdId)
+    if (schema) {
+      const jsonLd = portfolioJsonLd(
+        locale.value,
+        copy.value,
+        content.en.profile.name,
+        (path) => publicAssetPath(path) !== undefined,
+      )
+      if (schema.textContent !== jsonLd) schema.textContent = jsonLd
     }
   })
 })
