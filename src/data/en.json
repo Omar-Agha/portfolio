@@ -96,6 +96,7 @@
   },
   "profile": {
     "avatar": "/images/profile.webp",
+    "avatarThumbnail": "/images/profile-thumb.webp",
     "resume": "/resume.pdf",
     "socials": {
       "github": "https://github.com/Omar-Agha",
@@ -342,7 +343,6 @@
         "id": "microservices-template",
         "visible": true,
         "status": "in-progress",
-        "cover": "/images/lab/microservices.webp",
         "technologies": [
           ".NET",
           "ABP Framework",
@@ -427,7 +427,6 @@
         "id": "spring-boot",
         "visible": true,
         "status": "experimental",
-        "cover": "/images/lab/spring.webp",
         "technologies": [
           "Java",
           "Spring Boot",

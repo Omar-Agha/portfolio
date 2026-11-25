@@ -93,6 +93,7 @@ type PortfolioContent = {
     headline?: string
     location?: string
     avatar?: string
+    avatarThumbnail?: string
     resume?: string
     socials: { github?: string; linkedin?: string; email?: string }
     availability?: { visible: boolean; label: string }

@@ -143,6 +143,7 @@ const socials = computed(() => ({
   email: emailUrl(profile.value.socials.email),
 }))
 const avatar = computed(() => assetUrl(profile.value.avatar))
+const avatarThumbnail = computed(() => assetUrl(profile.value.avatarThumbnail) ?? avatar.value)
 
 const selection = ref<{ kind: 'work' | 'lab'; id: string } | null>(null)
 let drawerOpener: HTMLButtonElement | undefined
@@ -254,7 +255,7 @@ onMounted(() => {
     ref="siteHeader"
     :locale="locale"
     :sections="sections"
-    :avatar="avatar"
+    :avatar="avatarThumbnail"
     :active-section-id="activeSectionId"
     @activate-anchor="activateAnchor"
   />
@@ -316,7 +317,7 @@ onMounted(() => {
 
   <SiteFooter
     :locale="locale"
-    :avatar="avatar"
+    :avatar="avatarThumbnail"
     :links="socials"
     @activate-anchor="activateAnchor"
   />
