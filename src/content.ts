@@ -130,20 +130,12 @@ export function isLocale(value: unknown): value is Locale {
   return typeof value === 'string' && Object.hasOwn(content, value)
 }
 
-// Production assets are relative to the entry document, which is one level deeper in Arabic.
-const entryBase =
-  import.meta.env.PROD &&
-  document.documentElement.lang === 'ar' &&
-  import.meta.env.BASE_URL === './'
-    ? '../'
-    : import.meta.env.BASE_URL
-export const siteBase = new URL(entryBase, document.baseURI)
 const publicFiles = new Set(__PORTFOLIO_PUBLIC_FILES__)
 
-export function assetUrl(value?: string): string | undefined {
+export function publicAssetPath(value?: string): string | undefined {
   if (!value) return
-  const path = '/' + value.replace(/^\/+/, '')
-  if (publicFiles.has(path)) return new URL(path.slice(1), siteBase).href
+  const path = value.replace(/^\/+/, '')
+  if (publicFiles.has('/' + path)) return path
 }
 
 export function webUrl(value?: string): string | undefined {

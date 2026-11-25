@@ -1,13 +1,8 @@
-<script lang="ts">
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
-</script>
-
 <script setup lang="ts">
+import { gsap } from 'gsap'
 import { computed, ref, useTemplateRef, watch } from 'vue'
-import { assetUrl, type AboutContent } from '../content'
+import type { AboutContent } from '../content'
+import { useRenderContext } from '../renderContext'
 import AboutPortrait from './AboutPortrait.vue'
 import SectionIntro from './SectionIntro.vue'
 
@@ -16,6 +11,7 @@ const props = defineProps<{
   portrait?: string
   portraitAlt: string
 }>()
+const { assetUrl } = useRenderContext()
 const entries = computed(() =>
   (props.about.sections ?? []).filter((entry) => entry.title?.trim() || entry.description?.trim()),
 )

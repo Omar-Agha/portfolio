@@ -2,7 +2,8 @@
 import { gsap } from 'gsap'
 import { computed, useTemplateRef, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { assetUrl, type content, type Locale } from '../content'
+import type { content, Locale } from '../content'
+import { useRenderContext } from '../renderContext'
 import SystemArtwork from './SystemArtwork.vue'
 
 const props = defineProps<{
@@ -16,8 +17,10 @@ const props = defineProps<{
 const emit = defineEmits<{ activateAnchor: [hash: string] }>()
 
 const route = useRoute()
+const { assetUrl, prerendered } = useRenderContext()
 const section = useTemplateRef('section')
 const hero = computed(() => props.profile.hero)
+let firstHydrationReveal = Boolean(prerendered.value)
 
 const titleLines = computed(() => {
   const words = hero.value.title.trim().split(/\s+/)
@@ -49,9 +52,12 @@ watch(
 
     const motion = gsap.matchMedia(heroSection)
     motion.add('(prefers-reduced-motion: no-preference)', () => {
+      // The static Hero can paint before the bundle arrives. Keep its first reveal visible.
+      const initialOpacity = firstHydrationReveal ? 0.88 : 0
+      firstHydrationReveal = false
       const copyEntrance = gsap.timeline({ paused: true, defaults: { ease: 'power2.out' } })
       copyEntrance.from('h1', {
-        opacity: 0,
+        opacity: initialOpacity,
         y: 12,
         duration: 0.55,
         clearProps: 'opacity,transform',
@@ -61,18 +67,18 @@ watch(
       if (details.length) {
         copyEntrance.from(
           details,
-          { opacity: 0, duration: 0.4, stagger: 0.08, clearProps: 'opacity' },
+          { opacity: initialOpacity, duration: 0.4, stagger: 0.08, clearProps: 'opacity' },
           0.18,
         )
       }
 
       const artEntrance = gsap.timeline({ paused: true, defaults: { ease: 'power2.out' } })
       artEntrance
-        .from('.assembly-axis', { opacity: 0, duration: 0.45, clearProps: 'opacity' })
+        .from('.assembly-axis', { opacity: initialOpacity, duration: 0.45, clearProps: 'opacity' })
         .from(
           '.assembly-plane',
           {
-            opacity: 0,
+            opacity: initialOpacity,
             '--plane-reveal-y': '8px',
             duration: 0.55,
             stagger: 0.12,

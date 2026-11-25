@@ -1,11 +1,5 @@
-<script lang="ts">
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
-</script>
-
 <script setup lang="ts">
+import { gsap } from 'gsap'
 import { computed, useTemplateRef, watch } from 'vue'
 import { type LabProject, webUrl } from '../content'
 import LabProjectIcon from './LabProjectIcon.vue'

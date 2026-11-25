@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { useId } from 'vue'
+import { onMounted, ref, useId } from 'vue'
 
 const gridId = useId()
-const supportsSignals = typeof CSS !== 'undefined' && typeof CSS.registerProperty === 'function'
+const supportsSignals = ref(false)
+onMounted(() => {
+  supportsSignals.value = typeof CSS !== 'undefined' && typeof CSS.registerProperty === 'function'
+})
 const trailBands = 12
 const routes = [
   { path: 'M52 104H156V52H286V104H390V208H260V260H130V208H52Z', duration: 19, delay: -4 },

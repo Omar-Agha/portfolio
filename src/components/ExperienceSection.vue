@@ -1,11 +1,6 @@
-<script lang="ts">
+<script setup lang="ts">
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
-</script>
-
-<script setup lang="ts">
 import { useTemplateRef, watch } from 'vue'
 import { nonblank, webUrl, type ExperienceContent, type Locale } from '../content'
 import SectionIntro from './SectionIntro.vue'

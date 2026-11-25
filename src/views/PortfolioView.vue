@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, useTemplateRef, watchEffect } from 'vue'
+import { computed, onMounted, ref, useTemplateRef, watchEffect } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import AboutSection from '../components/AboutSection.vue'
 import ContactSection from '../components/ContactSection.vue'
@@ -12,7 +12,6 @@ import SiteFooter from '../components/SiteFooter.vue'
 import SiteHeader from '../components/SiteHeader.vue'
 import SkillsSection from '../components/SkillsSection.vue'
 import {
-  assetUrl,
   content,
   defaultLocale,
   emailUrl,
@@ -21,9 +20,11 @@ import {
   presentItems,
   webUrl,
 } from '../content'
+import { useRenderContext } from '../renderContext'
 import { pageMetadata } from '../seo'
 
 const route = useRoute()
+const { assetUrl } = useRenderContext()
 const locale = computed(() => (isLocale(route.meta.locale) ? route.meta.locale : defaultLocale))
 const copy = computed(() => content[locale.value])
 const ui = computed(() => copy.value.site.ui)
@@ -70,8 +71,9 @@ watchEffect(
   (onCleanup) => {
     const header = siteHeader.value?.element
     const main = mainContent.value
+    if (!header || !main) return
     const scrollRoot = document.scrollingElement
-    if (!header || !main || !scrollRoot) return
+    if (!scrollRoot) return
 
     const sectionsFromBottom = sections.value
       .map(({ id }) => document.getElementById(id))
@@ -214,18 +216,20 @@ function setMeta(attribute: 'name' | 'property', key: string, value: string) {
   tag.content = value
 }
 
-watchEffect(() => {
-  const metadata = pageMetadata(locale.value, copy.value.site.seo)
-  document.documentElement.lang = locale.value
-  document.documentElement.dir = locale.value === 'ar' ? 'rtl' : 'ltr'
-  document.title = metadata.title
-  document.head.querySelector('link[rel="canonical"]')?.setAttribute('href', metadata.canonical)
-  const favicon = assetUrl('/favicon.ico')
-  if (favicon) document.head.querySelector('link[rel="icon"]')?.setAttribute('href', favicon)
-  for (const [name, value] of Object.entries(metadata.named)) setMeta('name', name, value)
-  for (const [property, value] of Object.entries(metadata.openGraph)) {
-    setMeta('property', property, value)
-  }
+onMounted(() => {
+  watchEffect(() => {
+    const metadata = pageMetadata(locale.value, copy.value.site.seo)
+    document.documentElement.lang = locale.value
+    document.documentElement.dir = locale.value === 'ar' ? 'rtl' : 'ltr'
+    document.title = metadata.title
+    document.head.querySelector('link[rel="canonical"]')?.setAttribute('href', metadata.canonical)
+    const favicon = assetUrl('/favicon.ico')
+    if (favicon) document.head.querySelector('link[rel="icon"]')?.setAttribute('href', favicon)
+    for (const [name, value] of Object.entries(metadata.named)) setMeta('name', name, value)
+    for (const [property, value] of Object.entries(metadata.openGraph)) {
+      setMeta('property', property, value)
+    }
+  })
 })
 </script>
 

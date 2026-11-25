@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { content, type Locale } from '../content'
+import { useRenderContext } from '../renderContext'
 import ProfileMark from './ProfileMark.vue'
 
 const props = defineProps<{
@@ -13,6 +14,7 @@ const props = defineProps<{
 const emit = defineEmits<{ activateAnchor: [hash: string] }>()
 
 const route = useRoute()
+const { prerendered } = useRenderContext()
 const copy = computed(() => content[props.locale])
 const profile = computed(() => copy.value.profile)
 const footer = computed(() => copy.value.footer)
@@ -28,7 +30,9 @@ const socialLinks = computed(() =>
 const copyright = computed(() => {
   const { showCurrentYear, copyrightName } = footer.value
   const year = showCurrentYear
-    ? new Intl.DateTimeFormat(props.locale, { year: 'numeric' }).format(new Date())
+    ? new Intl.NumberFormat(props.locale, { useGrouping: false }).format(
+        prerendered.value?.year ?? new Date().getFullYear(),
+      )
     : ''
   return [year, copyrightName?.trim()].filter(Boolean).join(' ')
 })

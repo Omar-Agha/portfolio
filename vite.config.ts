@@ -5,6 +5,7 @@ import { fileURLToPath, URL } from 'node:url'
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
+import { prerenderPortfolio } from './build/prerender.ts'
 import ar from './src/data/ar.json' with { type: 'json' }
 import en from './src/data/en.json' with { type: 'json' }
 import { canonicalUrls, pageMetadata, productionSiteUrl } from './src/seo.ts'
@@ -27,6 +28,7 @@ export default defineConfig({
   plugins: [
     vue(),
     tailwindcss(),
+    prerenderPortfolio(),
     {
       name: 'portfolio-metadata',
       transformIndexHtml: (_html, { filename }) => {
