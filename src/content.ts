@@ -21,6 +21,7 @@ export type ContactContent = Introduction & {
 
 export type AboutContent = {
   eyebrow?: string
+  profileAvatar?: string
   title: string
   introduction?: string
   sections?: { id: string; number?: string | number; title?: string; description?: string }[]

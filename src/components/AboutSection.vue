@@ -92,8 +92,8 @@ function sizePortrait(event: Event) {
     >
       <div class="about-portrait-window">
         <img
-          :key="portraitSrc"
-          :src="portraitSrc"
+          :key="about.profileAvatar"
+          :src="about.profileAvatar"
           :alt="portraitAlt"
           loading="lazy"
           decoding="async"
