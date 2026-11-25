@@ -1,7 +1,8 @@
 import en from './data/en.json'
 import ar from './data/ar.json'
+import type { Locale, SeoCopy } from './seo'
 
-export type Locale = 'en' | 'ar'
+export { localePaths, type Locale } from './seo'
 
 type Action = { type: string; target?: string }
 
@@ -83,7 +84,7 @@ type PortfolioContent = {
     supportedLocales: string[]
     navigation: { id: string; label: string; href: string }[]
     sections: { id: string; visible: boolean }[]
-    seo: { title: string; description: string; ogImage?: string }
+    seo: SeoCopy
     ui: Omit<typeof en.site.ui, 'status'> & { status: Record<string, string> }
     logoText: string
   }
@@ -128,8 +129,6 @@ export const defaultLocale: Locale = en.site.defaultLocale === 'ar' ? 'ar' : 'en
 export function isLocale(value: unknown): value is Locale {
   return typeof value === 'string' && Object.hasOwn(content, value)
 }
-
-export const localePaths: Record<Locale, string> = { en: '/', ar: '/ar/' }
 
 // Production assets are relative to the entry document, which is one level deeper in Arabic.
 const entryBase =

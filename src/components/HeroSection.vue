@@ -135,7 +135,7 @@ watch(
     <div class="hero-copy">
       <p v-if="hero.eyebrow" class="eyebrow">{{ hero.eyebrow }}</p>
       <h1>
-        <span v-for="line in titleLines" :key="line">{{ line }}</span>
+        <span v-for="(line, index) in titleLines" :key="line">{{ index ? ` ${line}` : line }}</span>
       </h1>
       <p v-if="hero.description" class="hero-description">{{ hero.description }}</p>
       <div v-if="heroActions.length" class="hero-actions flex flex-wrap gap-3">

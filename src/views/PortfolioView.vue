@@ -21,6 +21,7 @@ import {
   presentItems,
   webUrl,
 } from '../content'
+import { pageMetadata } from '../seo'
 
 const route = useRoute()
 const locale = computed(() => (isLocale(route.meta.locale) ? route.meta.locale : defaultLocale))
@@ -203,12 +204,8 @@ const detail = computed<ProjectDetail | null>(() => {
   }
 })
 
-function setMeta(attribute: 'name' | 'property', key: string, value?: string) {
+function setMeta(attribute: 'name' | 'property', key: string, value: string) {
   let tag = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`)
-  if (!value) {
-    tag?.remove()
-    return
-  }
   if (!tag) {
     tag = document.createElement('meta')
     tag.setAttribute(attribute, key)
@@ -218,17 +215,17 @@ function setMeta(attribute: 'name' | 'property', key: string, value?: string) {
 }
 
 watchEffect(() => {
-  const { title, description, ogImage } = copy.value.site.seo
+  const metadata = pageMetadata(locale.value, copy.value.site.seo)
   document.documentElement.lang = locale.value
   document.documentElement.dir = locale.value === 'ar' ? 'rtl' : 'ltr'
-  document.title = title
-  setMeta('name', 'description', description)
-  setMeta('property', 'og:title', title)
-  setMeta('property', 'og:description', description)
-  setMeta('property', 'og:locale', locale.value === 'ar' ? 'ar_SY' : 'en_US')
-  const image = assetUrl(ogImage)
-  setMeta('property', 'og:image', image)
-  setMeta('name', 'twitter:card', image ? 'summary_large_image' : 'summary')
+  document.title = metadata.title
+  document.head.querySelector('link[rel="canonical"]')?.setAttribute('href', metadata.canonical)
+  const favicon = assetUrl('/favicon.ico')
+  if (favicon) document.head.querySelector('link[rel="icon"]')?.setAttribute('href', favicon)
+  for (const [name, value] of Object.entries(metadata.named)) setMeta('name', name, value)
+  for (const [property, value] of Object.entries(metadata.openGraph)) {
+    setMeta('property', property, value)
+  }
 })
 </script>
 
