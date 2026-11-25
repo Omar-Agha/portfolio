@@ -7,7 +7,8 @@ gsap.registerPlugin(ScrollTrigger)
 
 <script setup lang="ts">
 import { computed, ref, useTemplateRef, watch } from 'vue'
-import type { AboutContent } from '../content'
+import { assetUrl, type AboutContent } from '../content'
+import AboutPortrait from './AboutPortrait.vue'
 import SectionIntro from './SectionIntro.vue'
 
 const props = defineProps<{
@@ -15,9 +16,6 @@ const props = defineProps<{
   portrait?: string
   portraitAlt: string
 }>()
-const supportsTrail = typeof CSS !== 'undefined' && typeof CSS.registerProperty === 'function'
-const trailBands = 20
-
 const entries = computed(() =>
   (props.about.sections ?? []).filter((entry) => entry.title?.trim() || entry.description?.trim()),
 )
@@ -52,32 +50,22 @@ watch(
   { flush: 'post' },
 )
 
-const failedPortrait = ref<string>()
-const portraitWidth = ref<number>()
-const portraitSrc = computed(() =>
-  props.portrait !== failedPortrait.value ? props.portrait : undefined,
-)
-
-watch(
-  () => props.portrait,
-  () => {
-    portraitWidth.value = undefined
-  },
-)
-
-function sizePortrait(event: Event) {
-  if (event.currentTarget instanceof HTMLImageElement) {
-    const { naturalWidth, naturalHeight } = event.currentTarget
-    portraitWidth.value = Math.floor(Math.min(naturalWidth, naturalHeight * 0.8) / 1.25)
-  }
-}
+const failedPortraits = ref(new Set<string>())
+const portraitSources = computed(() => {
+  const avatar = props.about.profileAvatar
+  const large = assetUrl(typeof avatar === 'string' ? avatar : avatar?.lg)
+  const small = assetUrl(typeof avatar === 'string' ? undefined : avatar?.sm)
+  const mobile = small && !failedPortraits.value.has(small) ? small : undefined
+  const src = [large, mobile, props.portrait].find((url) => url && !failedPortraits.value.has(url))
+  return { src, mobile }
+})
 </script>
 
 <template>
   <section
     id="about"
     class="shell portfolio-section about-section"
-    :class="{ 'about-section--with-portrait': portraitSrc }"
+    :class="{ 'about-section--with-portrait': portraitSources.src }"
     tabindex="-1"
   >
     <div class="about-lead">
@@ -85,36 +73,13 @@ function sizePortrait(event: Event) {
       <p v-if="about.introduction?.trim()" class="about-introduction">{{ about.introduction }}</p>
     </div>
 
-    <figure
-      v-if="portraitSrc"
-      class="about-portrait relative"
-      :style="{ '--portrait-native-width': portraitWidth ? `${portraitWidth}px` : undefined }"
-    >
-      <div class="about-portrait-window">
-        <img
-          :key="about.profileAvatar"
-          :src="about.profileAvatar"
-          :alt="portraitAlt"
-          loading="lazy"
-          decoding="async"
-          @load="sizePortrait"
-          @error="failedPortrait = portraitSrc"
-        />
-      </div>
-      <span class="about-portrait-orbit" aria-hidden="true">
-        <svg v-if="supportsTrail" class="about-portrait-trail" focusable="false">
-          <rect
-            v-for="band in trailBands"
-            :key="band"
-            width="100%"
-            height="100%"
-            pathLength="100"
-            :style="{ '--trail-length': (band / trailBands) * 5 }"
-          />
-        </svg>
-        <span class="about-portrait-dot"></span>
-      </span>
-    </figure>
+    <AboutPortrait
+      v-if="portraitSources.src"
+      :src="portraitSources.src"
+      :mobile-src="portraitSources.mobile"
+      :alt="portraitAlt"
+      @unavailable="failedPortraits.add($event)"
+    />
 
     <ol v-if="entries.length" ref="editorialList" class="about-entries" role="list">
       <li v-for="entry in entries" :key="entry.id" class="about-entry">

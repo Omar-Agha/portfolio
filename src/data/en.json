@@ -625,7 +625,10 @@
   },
   "about": {
     "eyebrow": "ABOUT ME",
-    "profileAvatar": "/images/profile-lg.webp",
+    "profileAvatar": {
+      "lg": "/images/about/me-lg.webp",
+      "sm": "/images/about/me-sm.webp"
+    },
     "title": "Engineering Beyond the Code",
     "introduction": "For me, software engineering is more than writing code. It's about understanding complex problems, making thoughtful decisions, and building systems that remain reliable as they grow.",
     "sections": [

@@ -625,7 +625,10 @@
   },
   "about": {
     "eyebrow": "نبذة عني",
-    "profileAvatar": "/images/profile-lg.webp",
+    "profileAvatar": {
+      "lg": "/images/about/me-lg.webp",
+      "sm": "/images/about/me-sm.webp"
+    },
     "title": "الهندسة أبعد من مجرد كتابة الكود",
     "introduction": "بالنسبة لي، هندسة البرمجيات ليست مجرد كتابة الكود، بل هي فهم المشكلات المعقدة، واتخاذ قرارات مدروسة، وبناء أنظمة تحافظ على موثوقيتها مع نموها وتوسعها.",
     "sections": [
