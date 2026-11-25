@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, shallowRef, useTemplateRef, watch } from 'vue'
+import { computed, nextTick, ref, shallowRef, useTemplateRef, watch } from 'vue'
 import { nonblank } from '../content'
 import TechnologyTags from './TechnologyTags.vue'
 
@@ -21,7 +21,10 @@ const props = defineProps<{
 }>()
 const emit = defineEmits<{ close: [] }>()
 const dialog = useTemplateRef('drawer')
+const drawerTitle = useTemplateRef('drawerTitle')
 const closeButton = useTemplateRef('closeButton')
+const compactCloseButton = useTemplateRef('compactCloseButton')
+const compact = ref(false)
 const previousProject = shallowRef<ProjectDetail | null>(null)
 const project = computed(() => props.activeProject ?? previousProject.value)
 const groups = computed(() =>
@@ -32,18 +35,51 @@ const groups = computed(() =>
 
 watch(
   () => props.activeProject,
-  (value) => {
+  async (value) => {
     const panel = dialog.value
     if (value && panel) {
       previousProject.value = value
       if (!panel.open) {
+        compact.value = false
         panel.showModal()
         panel.scrollTop = 0
-        closeButton.value?.focus({ preventScroll: true })
+        await nextTick()
+        if (panel.open) closeButton.value?.focus({ preventScroll: true })
       }
     } else {
       panel?.close()
     }
+  },
+  { flush: 'post' },
+)
+
+watch(
+  [dialog, drawerTitle],
+  ([panel, title], _, onCleanup) => {
+    if (!panel || !title || typeof IntersectionObserver === 'undefined') return
+
+    const observer = new IntersectionObserver(
+      async ([entry]) => {
+        if (!panel.open || !entry?.rootBounds) return
+
+        const pastTitle = !entry.isIntersecting && entry.boundingClientRect.bottom <= entry.rootBounds.top
+        if (pastTitle === compact.value) return
+
+        const currentButton = compact.value ? compactCloseButton.value : closeButton.value
+        const hadFocus = document.activeElement === currentButton
+        compact.value = pastTitle
+
+        if (hadFocus) {
+          await nextTick()
+          if (!panel.open || compact.value !== pastTitle) return
+          const visibleButton = pastTitle ? compactCloseButton.value : closeButton.value
+          visibleButton?.focus({ preventScroll: true })
+        }
+      },
+      { root: panel },
+    )
+    observer.observe(title)
+    onCleanup(() => observer.disconnect())
   },
   { flush: 'post' },
 )
@@ -53,15 +89,16 @@ watch(
   <dialog
     ref="drawer"
     class="project-drawer"
+    :data-compact="compact"
     aria-labelledby="drawer-title"
     @close="emit('close')"
     @click.self="dialog?.close()"
   >
-    <div v-if="project" class="drawer-content">
-      <div class="drawer-top flex items-center justify-between gap-4">
-        <p v-if="project.subtitle" class="eyebrow" dir="auto">{{ project.subtitle }}</p>
+    <div v-if="project" class="drawer-sticky">
+      <div class="drawer-compact" :inert="!compact">
+        <p class="drawer-compact-title" aria-hidden="true"><bdi>{{ project.title }}</bdi></p>
         <button
-          ref="closeButton"
+          ref="compactCloseButton"
           type="button"
           class="icon-button drawer-close"
           @click="dialog?.close()"
@@ -69,8 +106,22 @@ watch(
           <span aria-hidden="true">×</span><span class="sr-only">{{ labels.close }}</span>
         </button>
       </div>
+    </div>
+    <div v-if="project" class="drawer-content">
+      <div class="drawer-top flex items-center justify-between gap-4">
+        <p v-if="project.subtitle" class="eyebrow" dir="auto">{{ project.subtitle }}</p>
+        <button
+          ref="closeButton"
+          type="button"
+          class="icon-button drawer-close"
+          :inert="compact"
+          @click="dialog?.close()"
+        >
+          <span aria-hidden="true">×</span><span class="sr-only">{{ labels.close }}</span>
+        </button>
+      </div>
       <div class="drawer-heading">
-        <h2 id="drawer-title">
+        <h2 id="drawer-title" ref="drawerTitle">
           <bdi>{{ project.title }}</bdi>
         </h2>
         <p v-if="project.meta.length" class="drawer-meta">
@@ -110,6 +161,7 @@ watch(
           v-for="link in project.links"
           :key="link.href"
           :href="link.href"
+          target="_blank"
           class="button button--outline"
           >{{ link.label }}</a
         >

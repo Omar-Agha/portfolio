@@ -134,54 +134,202 @@
         "id": "financial-platform",
         "visible": true,
         "featured": true,
-        "cover": "/images/projects/financial-platform.webp",
+        "cover": "/images/projects/emps-rem-issue.webp",
         "tags": [
           ".NET",
           "ABP Framework",
           "RabbitMQ",
           "Redis",
-          "Kubernetes"
+          "SQL Server",
+          "Kubernetes",
+          "Microservices"
         ],
         "links": [],
-        "title": "Financial Services Platform",
-        "subtitle": "Enterprise Fintech",
-        "summary": "Distributed financial services supporting remittance, accounting, and balance management operations.",
-        "description": "A microservices-based financial platform supporting remittance and other business-critical workflows. My work focused on backend domain services, accounting ledger functionality, and balance tracking.",
-        "role": "Backend Developer",
-        "period": "Dates to confirm",
+        "title": "EMPS — Enterprise Money Platform System",
+        "subtitle": "Enterprise FinTech & Distributed Systems",
+        "summary": "An enterprise financial platform built on distributed microservices, supporting money remittance, currency exchange, and online and offline financial services.",
+        "description": "EMPS is an enterprise financial platform designed to support a wide range of financial operations, including money remittance, currency exchange, accounting, and online and offline financial services. Developed at MIS, the platform comprises over 20 microservices and supports operations across more than 300 branches in Syria. As part of a Scrum engineering team, I contributed to multiple financial domains while taking primary development responsibility for several business-critical modules.",
+        "role": "Software Engineer",
+        "period": "2023–Present",
         "architecture": [
-          "Microservices",
+          "Microservices Architecture",
           "Domain-Driven Design",
-          "Event-Driven Architecture"
+          "Clean Architecture",
+          "Event-Driven Architecture",
+          "Plugin-Based Architecture",
+          "Inbox / Outbox Patterns"
         ],
         "challenges": [
-          "Maintaining data consistency across services",
-          "Managing complex financial business rules"
+          "Maintaining financial data consistency across distributed services and concurrent operations.",
+          "Modeling complex financial domains and business-critical transaction workflows.",
+          "Ensuring reliable asynchronous communication between independently deployed microservices.",
+          "Designing extensible components capable of accommodating evolving financial business requirements.",
+          "Automating recurring financial operations across multiple services."
         ],
         "contributions": [
-          "Developed backend financial domain services",
-          "Implemented accounting ledger functionality",
-          "Worked on balance tracking and financial workflows"
+          "Took primary development responsibility for online financial services, invoice exchange, and recurring job functionality.",
+          "Contributed to the development and maintenance of financial microservices using .NET and ABP Framework.",
+          "Implemented financial domain logic following Domain-Driven Design and Clean Architecture principles.",
+          "Applied optimistic concurrency control using timestamp-based concurrency tokens to protect against conflicting updates.",
+          "Implemented Inbox and Outbox patterns to improve the reliability of asynchronous service communication.",
+          "Designed plugin-based components to support extensibility and reduce coupling.",
+          "Developed automated financial workflows and recurring background jobs using Hangfire.",
+          "Contributed to accounting ledger, trading ledger, and balance tracking functionality."
         ],
-        "outcomes": []
+        "outcomes": [
+          "Delivered business-critical financial functionality within an enterprise distributed platform.",
+          "Supported reliable financial operations through concurrency protection and resilient messaging patterns.",
+          "Enabled extensible financial functionality through plugin-based design.",
+          "Automated recurring financial workflows, reducing the need for manual execution."
+        ]
       },
       {
         "id": "future-gym",
         "visible": true,
         "featured": false,
-        "cover": "/images/lab/7ake.webp",
-        "tags": [],
-        "links": [],
-        "title": "Future Gym",
+        "cover": "/images/projects/future-gym.webp",
+        "tags": [
+          "Laravel",
+          "Filament",
+          "MySQL",
+          "REST APIs",
+          "Flutter",
+          "Firebase"
+        ],
+        "links": [
+          {
+            "label": "Google Play",
+            "url": "https://play.google.com/store/apps/details?id=net.future_gym"
+          },
+          {
+            "label": "App Store",
+            "url": "https://apps.apple.com/sa/app/future-gym/id6469106275"
+          }
+        ],
+        "title": "FutureGym",
         "subtitle": "Fitness Management Platform",
-        "summary": "A fitness-focused platform designed to support gym operations and member management.",
-        "description": "Future Gym is a fitness management project focused on supporting gym-related workflows and providing a streamlined experience for managing fitness services.",
-        "role": "Developer",
-        "period": "",
-        "architecture": [],
-        "challenges": [],
-        "contributions": [],
-        "outcomes": []
+        "summary": "A multi-role fitness management platform supporting gym operations, subscription management, workout scheduling, and trainee progress tracking.",
+        "description": "A production cross-platform fitness management application connecting gym administrators, trainers, and trainees within a unified platform. Developed during my time at E-solution groups, I was responsible for the entire backend, including database design, business logic, REST APIs, and administrative tools.",
+        "role": "Backend Developer",
+        "period": "2022–2023",
+        "architecture": [
+          "Monolithic Architecture",
+          "RESTful APIs",
+          "Relational Database Design",
+          "Role-Based Access Control"
+        ],
+        "challenges": [
+          "Modeling relationships between gyms, trainers, trainees, and workout schedules.",
+          "Managing authorization and access permissions across multiple user roles.",
+          "Designing subscription plans with feature-based access entitlements for gym administrators.",
+          "Supporting manual invoice-based payments within the subscription lifecycle."
+        ],
+        "contributions": [
+          "Designed and developed the entire backend using Laravel and MySQL.",
+          "Built REST APIs supporting the cross-platform Flutter application.",
+          "Implemented subscription management with configurable plans and feature-based access.",
+          "Developed role-based authorization for administrators, trainers, and trainees.",
+          "Implemented gym management, workout scheduling, and trainee progress tracking.",
+          "Built a centralized administrative dashboard using Filament."
+        ],
+        "outcomes": [
+          "Successfully delivered a production-ready backend supporting iOS and Android applications.",
+          "Unified gym administration, training management, and trainee workflows within a single platform.",
+          "Enabled subscription-based access to platform features for gym administrators.",
+          "Delivered centralized administrative tools for managing platform operations."
+        ]
+      },
+      {
+        "id": "dr-calories",
+        "visible": true,
+        "featured": false,
+        "cover": "/images/projects/dr-calories.webp",
+        "tags": [
+          "Laravel",
+          "Filament",
+          "MySQL",
+          "REST APIs",
+          "Flutter",
+          "Firebase"
+        ],
+        "links": [],
+        "title": "Dr. Calories",
+        "subtitle": "Nutrition & Wellness Management Platform",
+        "summary": "A nutrition management platform supporting personalized meal planning, dynamic dietary requests, and client wellness management.",
+        "description": "A cross-platform nutrition and wellness application designed to streamline the management of personalized dietary programs. Developed during my time at E-solution groups, I was responsible for backend development during the initial development phase, focusing on dietary workflows, meal construction, business logic, and administrative tools.",
+        "role": "Backend Developer",
+        "period": "2022–2023",
+        "architecture": [
+          "Monolithic Architecture",
+          "RESTful APIs",
+          "Relational Database Design",
+          "Role-Based Access Control"
+        ],
+        "challenges": [
+          "Designing flexible dietary request models supporting different request types and varying client requirements.",
+          "Managing dynamic food preferences and dietary restrictions within personalized meal plans.",
+          "Modeling relationships between food items, nutritional values, meal plans, and client requests.",
+          "Supporting nutritional calculations during meal plan construction."
+        ],
+        "contributions": [
+          "Designed and developed backend functionality using Laravel and MySQL.",
+          "Implemented flexible dietary request workflows supporting multiple request types.",
+          "Developed meal construction functionality with aggregated nutritional values and reusable meal plan templates.",
+          "Implemented personalized food preferences and dietary requirements.",
+          "Developed administrative tools using Filament for managing clients, food items, and dietary programs.",
+          "Built REST APIs and integrated Firebase notifications."
+        ],
+        "outcomes": [
+          "Established the backend foundation for personalized nutrition management.",
+          "Enabled administrators to construct customized meal plans based on client requests and nutritional requirements."
+        ]
+      },
+      {
+        "id": "sama-art",
+        "visible": true,
+        "featured": false,
+        "cover": "/images/projects/sama-art.webp",
+        "tags": [
+          "Laravel",
+          "Bootstrap",
+          "JavaScript",
+          "CSS",
+          "MySQL"
+        ],
+        "links": [
+          {
+            "label": "Live Website",
+            "url": "https://samaart.com/"
+          }
+        ],
+        "title": "Sama Art",
+        "subtitle": "Corporate Media & Entertainment Platform",
+        "summary": "A bilingual corporate platform showcasing media production, localization, dubbing services, and an extensive production portfolio.",
+        "description": "A corporate website and content management platform developed for Sama Art, a media production, localization, and dubbing company. Developed collaboratively during my time at E-solution groups, my contributions focused on frontend development, interactive animations, responsive layouts, and cross-browser compatibility.",
+        "role": "Frontend Developer",
+        "period": "2022–2023",
+        "architecture": [
+          "Laravel-Based CMS",
+          "Responsive Web Design",
+          "Bilingual Architecture (RTL / LTR)"
+        ],
+        "challenges": [
+          "Meeting strict visual requirements and maintaining pixel-accurate layouts across different screen sizes.",
+          "Implementing complex animations while preserving a consistent user experience.",
+          "Resolving browser-specific rendering and CSS compatibility issues, particularly in Safari.",
+          "Maintaining responsive layouts across both Arabic and English interfaces."
+        ],
+        "contributions": [
+          "Collaborated on the development of the corporate website and its dynamic frontend.",
+          "Implemented interactive animations and visual transitions throughout the website.",
+          "Handled the majority of mobile responsiveness and layout adaptations.",
+          "Resolved cross-browser compatibility issues across Chrome and Safari.",
+          "Refined frontend components to meet precise client design requirements."
+        ],
+        "outcomes": [
+          "Contributed to the delivery of a live, bilingual corporate platform.",
+          "Delivered responsive and visually consistent interfaces across desktop and mobile devices."
+        ]
       }
     ]
   },
