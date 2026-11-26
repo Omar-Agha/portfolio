@@ -135,7 +135,7 @@
         "id": "financial-platform",
         "visible": true,
         "featured": true,
-        "cover": "/images/projects/emps-rem-issue.webp",
+        "cover": "",
         "tags": [
           ".NET",
           "ABP Framework",
